@@ -39,7 +39,6 @@ public class RGBtoPNG {
         //prompt user to enter file path for tileFolder
         tileFolder = JOptionPane.showInputDialog(null, "Please copy and paste the file path for the folder in which you wish to store the color tiles: ", "Please Enter A File Path", JOptionPane.WARNING_MESSAGE);
         
-        
         //parse int r, g, and b values to strings to form rgbVal and make file and increment values
         while (!rgbVal.equals("255, 255, 255")) {
             //parse int values to strings and combine
@@ -57,7 +56,6 @@ public class RGBtoPNG {
             g2.setColor(imgColor);
             g2.fillRect(0, 0, 1, 1);
             ImageIO.write(img, "PNG", f);
-            
             
             //increment r, g, and b
             if (r<255)  {
