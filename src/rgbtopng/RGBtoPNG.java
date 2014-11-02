@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package rgbtopng;
 
 import java.awt.Color;
@@ -49,13 +44,16 @@ public class RGBtoPNG {
             
             //create PNG file filled with defined rgb color
             rgbValCondensed = rString + "-" + gString + "-" + bString; 
-            BufferedImage img = new BufferedImage(1, 1, TYPE_INT_RGB);
+            BufferedImage img = new BufferedImage(250, 250, TYPE_INT_RGB);
             File f = new File(tileFolder + rgbValCondensed + ".png");
             Graphics2D g2 = img.createGraphics();
             Color imgColor = new Color(r, g, b);
             g2.setColor(imgColor);
-            g2.fillRect(0, 0, 1, 1);
+            g2.fillRect(0, 0, 250, 250);
             ImageIO.write(img, "PNG", f);
+            
+            //suggest garbage collection to attempt to prevent high memory use
+            System.gc();
             
             //increment r, g, and b
             if (r<255)  {
