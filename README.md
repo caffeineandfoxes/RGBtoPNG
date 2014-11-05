@@ -7,7 +7,10 @@ This was created with the intention to be used to create swatches in the design 
 
 ##Note
 
-This program currently outputs image files with a 250px x 250px resolution, and has no option to change the resolution during execution. This is due to the amount of time it takes to generate all of the files and the processing power it demands. In future releases, this may be adjustable, but it must be noted that processing time may not see significant improvement until a new file generation method is implemented. Furthermore, this program will run until it finishes the operation or reaches an error. If you need to kill the program prior to either of these events, use your operating system's task manager to kill "Java SE Binary".
+This program demands a large amount of system resources, and is recommended to be run when your computer is not needed for several hours. From testing, the program can take as many as five days to run to completion. Your run time will vary if you choose to adjust the file size, as well as the specifications of the computer. If at any point you need to abort the program, you may need to use your operating system's task manager to "kill" the program.
+
+##Disclaimer
+I am not responsible for any losses, damages, or other consequences of running this program on your computer system. By downloading and running the program, you are accepting any and all responsibility for the program's actions. Use at your own risk.
 
 Enjoy!
 ======
