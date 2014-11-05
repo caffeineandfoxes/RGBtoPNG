@@ -1,13 +1,29 @@
+/*
+ * The MIT License
+ *
+ * Copyright 2014 David Fink.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
 package rgbtopng;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import static java.awt.image.BufferedImage.TYPE_INT_RGB;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
-import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -18,56 +34,9 @@ public class RGBtoPNG {
     /**
      * @param args the command line arguments
      */
-    
-    public static void main(String[] args) throws IOException {
-        //instance variables
-        int r = 0;
-        int g = 0;
-        int b = 0;
-        String rString = new String();
-        String gString = new String();
-        String bString = new String();
-        String rgbVal = new String();
-        String rgbValCondensed = new String();
-        String tileFolder = new String();
-        
-        //prompt user to enter file path for tileFolder
-        tileFolder = JOptionPane.showInputDialog(null, "Please copy and paste the file path for the folder in which you wish to store the color tiles: ", "Please Enter A File Path", JOptionPane.WARNING_MESSAGE);
-        
-        //parse int r, g, and b values to strings to form rgbVal and make file and increment values
-        while (!rgbVal.equals("255, 255, 255")) {
-            //parse int values to strings and combine
-            rString = "" + r;
-            gString = "" + g;
-            bString = "" + b;
-            rgbVal = rString + ", " + gString+ ", " + bString;
-            
-            //create PNG file filled with defined rgb color
-            rgbValCondensed = rString + "-" + gString + "-" + bString; 
-            BufferedImage img = new BufferedImage(250, 250, TYPE_INT_RGB);
-            File f = new File(tileFolder + rgbValCondensed + ".png");
-            Graphics2D g2 = img.createGraphics();
-            Color imgColor = new Color(r, g, b);
-            g2.setColor(imgColor);
-            g2.fillRect(0, 0, 250, 250);
-            ImageIO.write(img, "PNG", f);
-            
-            //suggest garbage collection to attempt to prevent high memory use
-            System.gc();
-            
-            //increment r, g, and b
-            if (r<255)  {
-                r++;
-            }
-            else if(r == 255 && g != 255) {
-                r = 0;
-                g++;
-            }
-            else if(r == 255)    {
-                r = 0;
-                g = 0;
-                b++;
-            }
-        }
+    public static void main(String[] args) {
+        GUI programGUI = new GUI();
+        programGUI.setVisible(true);
+        programGUI.setDefaultCloseOperation(programGUI.EXIT_ON_CLOSE);
     }
 }
