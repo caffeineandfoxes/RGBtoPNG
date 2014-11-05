@@ -7,7 +7,7 @@ This was created with the intention to be used to create swatches in the design 
 
 ##Note
 
-This program currently outputs image files with a 1px x 1px resolution, and has no option to change the resolution during execution. This is due to the amount of time it takes to generate all of the files and the processing power it demands. In future releases, this may be adjusted to a larger size, but under no circumstances will the resolution exceed 25px x 25px unless a new file generation method is implemented. Furthermore, this program will run until it finishes the operation or reaches an error. If you need to kill the program prior to either of these events, use your operating system's task manager to kill "Java SE Binary".
+This program currently outputs image files with a 250px x 250px resolution, and has no option to change the resolution during execution. This is due to the amount of time it takes to generate all of the files and the processing power it demands. In future releases, this may be adjustable, but it must be noted that processing time may not see significant improvement until a new file generation method is implemented. Furthermore, this program will run until it finishes the operation or reaches an error. If you need to kill the program prior to either of these events, use your operating system's task manager to kill "Java SE Binary".
 
 Enjoy!
 ======
