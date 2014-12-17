@@ -3,6 +3,8 @@ RGBtoPNG
 
 RGBtoPNG comes as an executable JAR, and in its current iteration, allows the user to generate one PNG file per run (an update is coming to allow multiple files/run).
 
+DOWNLOAD: http://bit.ly/RGBtoPNG_JAR
+
 ##Use Case
 This program was created to give creative workers an easy way to generate imagery depicting colors needed for a project, either to store for oneself or to pass along to a fellow creative for reference.
 
