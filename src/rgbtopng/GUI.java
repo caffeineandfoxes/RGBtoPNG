@@ -32,6 +32,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 /**
@@ -58,6 +59,7 @@ public class GUI extends javax.swing.JFrame {
         String bString = new String();
         String rgbVal = new String();
         String rgbValCondensed = new String();
+        JFileChooser directoryChooser = new JFileChooser();
         String tileFolder = new String();
 
     /**
@@ -73,14 +75,19 @@ public class GUI extends javax.swing.JFrame {
         jTextArea1 = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
-        start_button = new javax.swing.JButton();
-        stop_button = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        jButton4 = new javax.swing.JButton();
+        jFileChooser1 = new javax.swing.JFileChooser();
         title_label = new javax.swing.JLabel();
-        ySize_Value = new javax.swing.JTextField();
-        xSize_Value = new javax.swing.JTextField();
-        change_size_button = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
+        rSlider = new javax.swing.JSlider();
+        gSlider = new javax.swing.JSlider();
+        bSlider = new javax.swing.JSlider();
+        colorViewer = new javax.swing.JPanel();
+        startButton = new javax.swing.JButton();
+        heightField = new javax.swing.JTextField();
+        widthField = new javax.swing.JTextField();
+        dimensionsButton = new javax.swing.JButton();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -90,175 +97,198 @@ public class GUI extends javax.swing.JFrame {
         jTextArea2.setRows(5);
         jScrollPane2.setViewportView(jTextArea2);
 
+        jButton4.setText("jButton4");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        start_button.setBackground(new java.awt.Color(168, 208, 178));
-        start_button.setText("Start");
-        start_button.setToolTipText("Executes the program.");
-        start_button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                start_buttonActionPerformed(evt);
-            }
-        });
-
-        stop_button.setBackground(new java.awt.Color(223, 144, 144));
-        stop_button.setText("Stop");
-        stop_button.setToolTipText("Aborts the program.");
-        stop_button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                stop_buttonActionPerformed(evt);
-            }
-        });
+        setTitle("RGBtoPNG");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setMaximumSize(new java.awt.Dimension(500, 500));
+        setMinimumSize(new java.awt.Dimension(500, 500));
+        setPreferredSize(new java.awt.Dimension(500, 500));
 
         title_label.setFont(new java.awt.Font("Gadugi", 1, 36)); // NOI18N
         title_label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         title_label.setText("RGBtoPNG");
         title_label.setToolTipText("");
+        title_label.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        title_label.setMaximumSize(new java.awt.Dimension(500, 50));
+        title_label.setMinimumSize(new java.awt.Dimension(500, 50));
+        title_label.setPreferredSize(new java.awt.Dimension(500, 50));
 
-        ySize_Value.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        ySize_Value.setText("250");
-        ySize_Value.addActionListener(new java.awt.event.ActionListener() {
+        rSlider.setMajorTickSpacing(10);
+        rSlider.setMaximum(255);
+        rSlider.setMinorTickSpacing(1);
+        rSlider.setValue(0);
+
+        gSlider.setMajorTickSpacing(10);
+        gSlider.setMaximum(255);
+        gSlider.setMinorTickSpacing(1);
+        gSlider.setValue(0);
+
+        bSlider.setMajorTickSpacing(10);
+        bSlider.setMaximum(255);
+        bSlider.setMinorTickSpacing(1);
+        bSlider.setValue(0);
+
+        colorViewer.setBackground(new java.awt.Color(255, 255, 255));
+        colorViewer.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        colorViewer.setMaximumSize(new java.awt.Dimension(150, 150));
+        colorViewer.setMinimumSize(new java.awt.Dimension(150, 150));
+        colorViewer.setPreferredSize(new java.awt.Dimension(150, 150));
+
+        javax.swing.GroupLayout colorViewerLayout = new javax.swing.GroupLayout(colorViewer);
+        colorViewer.setLayout(colorViewerLayout);
+        colorViewerLayout.setHorizontalGroup(
+            colorViewerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        colorViewerLayout.setVerticalGroup(
+            colorViewerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        startButton.setBackground(new java.awt.Color(0, 204, 0));
+        startButton.setText("Start");
+        startButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ySize_ValueActionPerformed(evt);
+                startButtonActionPerformed(evt);
             }
         });
 
-        xSize_Value.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        xSize_Value.setText("250");
-        xSize_Value.addActionListener(new java.awt.event.ActionListener() {
+        heightField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        heightField.setText("250");
+        heightField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                xSize_ValueActionPerformed(evt);
+                heightFieldActionPerformed(evt);
             }
         });
 
-        change_size_button.setText("Change Size");
-        change_size_button.addActionListener(new java.awt.event.ActionListener() {
+        widthField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        widthField.setText("250");
+        widthField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                change_size_buttonActionPerformed(evt);
+                widthFieldActionPerformed(evt);
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        jLabel1.setText(rgbValCondensed);
+        dimensionsButton.setText("Set Dimnensions");
+        dimensionsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dimensionsButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(title_label, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(stop_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(start_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(150, 150, 150)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(colorViewer, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(title_label, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(rSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(gSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(bSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
+                                .addComponent(widthField, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(change_size_button)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(xSize_Value, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ySize_Value, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 116, Short.MAX_VALUE)))
-                .addContainerGap())
+                                .addComponent(heightField, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(24, 24, 24)
+                            .addComponent(startButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(dimensionsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(16, 16, 16))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(394, 394, 394)
+                .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(title_label)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)))
+                .addGap(32, 32, 32)
+                .addComponent(title_label, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(colorViewer, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(rSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(gSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ySize_Value, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(xSize_Value, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(change_size_button)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(start_button, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(stop_button, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                    .addComponent(widthField, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(heightField, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(startButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dimensionsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(198, 198, 198))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void start_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_start_buttonActionPerformed
-        //prompt user to enter file path for tileFolder
-        tileFolder = JOptionPane.showInputDialog(null, "Please copy and paste the file path for the folder in which you wish to store the color tiles: ", "Please Enter A File Path", JOptionPane.WARNING_MESSAGE);
-
-        //parse int r, g, and b values to strings to form rgbVal and make file and increment values
-        while (!rgbVal.equals("255, 255, 255")) {
-            try {
-                //parse int values to strings and combine
-                rString = "" + r;
-                gString = "" + g;
-                bString = "" + b;
-                rgbVal = rString + ", " + gString + ", " + bString;
-
-                //create PNG file filled with defined rgb color
-                rgbValCondensed = rString + "-" + gString + "-" + bString;
-                BufferedImage img = new BufferedImage(xSize, ySize, TYPE_INT_RGB);
-                File f = new File(tileFolder + rgbValCondensed + ".png");
-                Graphics2D g2 = img.createGraphics();
-                Color imgColor = new Color(r, g, b);
-                g2.setColor(imgColor);
-                g2.fillRect(0, 0, xSize, ySize);
-                ImageIO.write(img, "PNG", f);
-
-                //suggest garbage collection to attempt to prevent high memory use
-                System.gc();
-
-                //increment r, g, and b
-                if (r < 255) {
-                    r++;
-                } else if (r == 255 && g != 255) {
-                    r = 0;
-                    g++;
-                } else if (r == 255) {
-                    r = 0;
-                    g = 0;
-                    b++;
-                }
-            } catch (IOException ex) {
-                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-            }
+    private void startButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startButtonActionPerformed
+        //prompt user to pick directory for tileFolder and assign it to the variable
+        directoryChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        directoryChooser.showDialog(null, "Select Output Directory");
+        File directory = directoryChooser.getSelectedFile();
+        try {
+            tileFolder = directory.getCanonicalPath();
+        } catch (IOException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_start_buttonActionPerformed
+        tileFolder += "\\";
+        System.out.println(tileFolder);
+        
+        //get rgb values from sliders
+        r = rSlider.getValue();
+        g = gSlider.getValue();
+        b = bSlider.getValue();
+        
+        //parse int values to strings and combine
+        rString = "" + r;
+        gString = "" + g;
+        bString = "" + b;
+        rgbVal = rString + ", " + gString + ", " + bString;
+        
+        //create PNG file filled with defined rgb color
+        rgbValCondensed = rString + "-" + gString + "-" + bString;
+        BufferedImage img = new BufferedImage(xSize, ySize, TYPE_INT_RGB);
+        File f = new File(tileFolder + rgbValCondensed + ".png");
+        Graphics2D g2 = img.createGraphics();
+        Color imgColor = new Color(r, g, b);
+        g2.setColor(imgColor);
+        g2.fillRect(0, 0, xSize, ySize);
+        try {
+            ImageIO.write(img, "PNG", f);
+        } catch (IOException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        dispose();
+    }//GEN-LAST:event_startButtonActionPerformed
 
-    private void stop_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stop_buttonActionPerformed
-        System.gc();
-        System.exit(0);
-    }//GEN-LAST:event_stop_buttonActionPerformed
+    private void heightFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_heightFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_heightFieldActionPerformed
 
-    private void ySize_ValueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ySize_ValueActionPerformed
-        ySize = Integer.parseInt(ySize_Value.getText());
-        System.out.println(ySize);
-    }//GEN-LAST:event_ySize_ValueActionPerformed
+    private void widthFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_widthFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_widthFieldActionPerformed
 
-    private void xSize_ValueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xSize_ValueActionPerformed
-        xSize = Integer.parseInt(xSize_Value.getText());
-        System.out.println(xSize);
-    }//GEN-LAST:event_xSize_ValueActionPerformed
-
-    private void change_size_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_change_size_buttonActionPerformed
-        xSize = Integer.parseInt(xSize_Value.getText());
-        ySize = Integer.parseInt(ySize_Value.getText());
-    }//GEN-LAST:event_change_size_buttonActionPerformed
+    private void dimensionsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dimensionsButtonActionPerformed
+        xSize = Integer.parseInt(widthField.getText());
+        ySize = Integer.parseInt(heightField.getText());
+    }//GEN-LAST:event_dimensionsButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -296,17 +326,22 @@ public class GUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton change_size_button;
+    private javax.swing.JSlider bSlider;
+    private javax.swing.JPanel colorViewer;
+    private javax.swing.JButton dimensionsButton;
     private javax.swing.Box.Filler filler1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JSlider gSlider;
+    private javax.swing.JTextField heightField;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JButton start_button;
-    private javax.swing.JButton stop_button;
+    private javax.swing.JSlider rSlider;
+    private javax.swing.JButton startButton;
     private javax.swing.JLabel title_label;
-    private javax.swing.JTextField xSize_Value;
-    private javax.swing.JTextField ySize_Value;
+    private javax.swing.JTextField widthField;
     // End of variables declaration//GEN-END:variables
 }
