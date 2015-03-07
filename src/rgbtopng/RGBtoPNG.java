@@ -69,6 +69,7 @@ public class RGBtoPNG extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         titleHeader = new javax.swing.JLabel();
         colorPreview = new javax.swing.JPanel();
@@ -88,12 +89,19 @@ public class RGBtoPNG extends javax.swing.JFrame {
         blueValueLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(350, 425));
-        setMinimumSize(new java.awt.Dimension(350, 425));
+        setMaximumSize(new java.awt.Dimension(400, 475));
+        setMinimumSize(new java.awt.Dimension(400, 475));
+        setPreferredSize(new java.awt.Dimension(400, 475));
+
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, titleHeader, org.jdesktop.beansbinding.ELProperty.create("${text}"), this, org.jdesktop.beansbinding.BeanProperty.create("title"));
+        bindingGroup.addBinding(binding);
+
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         titleHeader.setFont(new java.awt.Font("Droid Sans", 0, 24)); // NOI18N
         titleHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titleHeader.setText("RGBtoPNG");
+        getContentPane().add(titleHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 150, -1));
 
         colorPreview.setBackground(new java.awt.Color(254, 254, 254));
         colorPreview.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -111,12 +119,15 @@ public class RGBtoPNG extends javax.swing.JFrame {
             .addGap(0, 96, Short.MAX_VALUE)
         );
 
+        getContentPane().add(colorPreview, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, -1, -1));
+
         rSlider.setMaximum(255);
         rSlider.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 rSliderStateChanged(evt);
             }
         });
+        getContentPane().add(rSlider, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, 250, -1));
 
         gSlider.setMaximum(255);
         gSlider.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -124,6 +135,7 @@ public class RGBtoPNG extends javax.swing.JFrame {
                 gSliderStateChanged(evt);
             }
         });
+        getContentPane().add(gSlider, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, 251, -1));
 
         bSlider.setMaximum(255);
         bSlider.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -131,6 +143,7 @@ public class RGBtoPNG extends javax.swing.JFrame {
                 bSliderStateChanged(evt);
             }
         });
+        getContentPane().add(bSlider, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 250, 251, -1));
 
         genButton.setBackground(new java.awt.Color(41, 180, 26));
         genButton.setText("Generate");
@@ -139,6 +152,7 @@ public class RGBtoPNG extends javax.swing.JFrame {
                 genButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(genButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 370, -1, -1));
 
         widthField.setText("50");
         widthField.addActionListener(new java.awt.event.ActionListener() {
@@ -146,6 +160,7 @@ public class RGBtoPNG extends javax.swing.JFrame {
                 widthFieldActionPerformed(evt);
             }
         });
+        getContentPane().add(widthField, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 300, 75, -1));
 
         heightField.setText("50");
         heightField.addActionListener(new java.awt.event.ActionListener() {
@@ -153,121 +168,35 @@ public class RGBtoPNG extends javax.swing.JFrame {
                 heightFieldActionPerformed(evt);
             }
         });
+        getContentPane().add(heightField, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 330, 75, -1));
 
+        widthLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         widthLabel.setText("Width");
+        getContentPane().add(widthLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 300, 50, 20));
 
+        heightLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         heightLabel.setText("Height");
+        getContentPane().add(heightLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 330, 50, 20));
 
         redLabel.setText("Red");
+        getContentPane().add(redLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 40, -1));
 
         greenLabel.setText("Green");
+        getContentPane().add(greenLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 40, -1));
 
         blueLabel.setText("Blue");
+        getContentPane().add(blueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 40, -1));
 
         redValueLabel.setText("50");
+        getContentPane().add(redValueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 150, -1, -1));
 
         greenValueLabel.setText("50");
+        getContentPane().add(greenValueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 200, -1, -1));
 
         blueValueLabel.setText("50");
+        getContentPane().add(blueValueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 250, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(redLabel)
-                    .addComponent(greenLabel)
-                    .addComponent(blueLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(gSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
-                    .addComponent(bSlider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(rSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
-                        .addComponent(widthLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(47, 47, 47)
-                        .addComponent(heightLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(27, 27, 27)
-                                .addComponent(colorPreview, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(23, 23, 23))
-                            .addComponent(titleHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(redValueLabel)
-                    .addComponent(greenValueLabel)
-                    .addComponent(blueValueLabel))
-                .addGap(24, 24, 24))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(96, 96, 96)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(widthField, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(heightField, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(genButton)
-                        .addGap(41, 41, 41)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(titleHeader)
-                        .addGap(4, 4, 4)
-                        .addComponent(colorPreview, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(rSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(171, 171, 171)
-                        .addComponent(redLabel))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(171, 171, 171)
-                        .addComponent(redValueLabel)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(gSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(greenLabel))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(greenValueLabel)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(blueLabel))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(blueValueLabel)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(widthLabel)
-                    .addComponent(heightLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(widthField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(heightField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                .addComponent(genButton)
-                .addContainerGap())
-        );
+        bindingGroup.bind();
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -382,5 +311,6 @@ public class RGBtoPNG extends javax.swing.JFrame {
     private javax.swing.JLabel titleHeader;
     private javax.swing.JTextField widthField;
     private javax.swing.JLabel widthLabel;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }
