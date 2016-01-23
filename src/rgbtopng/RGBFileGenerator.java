@@ -38,7 +38,7 @@ public class RGBFileGenerator {
 
     //generates a .rgb file which contains a serialized array of String objects
     //for every possible RGB value
-    public static void writeRGBFile() throws FileNotFoundException, IOException {
+    public void writeRGBFile() throws FileNotFoundException, IOException {
         //declare and initialize variables for use in generating the array which
         //will then be serialized into a .rgb file
         String[] rgbVals = new String[16777216];
@@ -87,7 +87,7 @@ public class RGBFileGenerator {
 
     //reads in a .rgb file containing a serialized String array of all possible
     //RGB values
-    public static String[] readRGBFile() throws IOException, ClassNotFoundException {
+    public String[] readRGBFile() throws IOException, ClassNotFoundException {
         //declare and initialize variables for use in reading a RGB file and
         //adding the values to an array of length 16777216 which will be returned
         String[] rgbValueInput = new String[16777216];
