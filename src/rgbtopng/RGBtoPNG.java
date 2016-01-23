@@ -30,6 +30,8 @@ import java.awt.image.BufferedImage;
 import static java.awt.image.BufferedImage.TYPE_INT_RGB;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
 /**
@@ -51,7 +53,8 @@ public class RGBtoPNG extends javax.swing.JFrame {
     private File outputDir;
     private Graphics2D g2D;
     private Color outputColor;
-    private File rgbFile;
+    private File rgbFile = new File("rgbValueArray.rgb");
+    ;
     private RGBFileGenerator rgbFileGen = new RGBFileGenerator();
 
     /**
@@ -60,15 +63,16 @@ public class RGBtoPNG extends javax.swing.JFrame {
     public RGBtoPNG() {
         initComponents();
 
-        rgbFile = new File("rgbValueArray.rgb");
-        if(!rgbFile.exists())   {
+        //checks if the file rgbValueArray.rgb exists, and if it does not exist,
+        //the application will generate a copy
+        if (!rgbFile.exists()) {
             try {
                 rgbFileGen.writeRGBFile();
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(null, "Error generating RGB file. "
-                + "Please restart the application to utilize the "
-                + "'Generate All' functionality.",
-                "Error Generating RGB File", JOptionPane.ERROR_MESSAGE);
+                        + "Please restart the application to utilize the "
+                        + "'Generate All' functionality.",
+                        "Error Generating RGB File", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
@@ -99,7 +103,7 @@ public class RGBtoPNG extends javax.swing.JFrame {
         redValueLabel = new javax.swing.JLabel();
         greenValueLabel = new javax.swing.JLabel();
         blueValueLabel = new javax.swing.JLabel();
-        generateAllButton = new javax.swing.JButton();
+        genAllButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(400, 475));
@@ -209,13 +213,13 @@ public class RGBtoPNG extends javax.swing.JFrame {
         blueValueLabel.setText("50");
         getContentPane().add(blueValueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 250, -1, -1));
 
-        generateAllButton.setText("Generate All");
-        generateAllButton.addActionListener(new java.awt.event.ActionListener() {
+        genAllButton.setText("Generate All");
+        genAllButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                generateAllButtonActionPerformed(evt);
+                genAllButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(generateAllButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 370, -1, -1));
+        getContentPane().add(genAllButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 370, -1, -1));
 
         bindingGroup.bind();
 
@@ -238,7 +242,9 @@ public class RGBtoPNG extends javax.swing.JFrame {
         try {
             savePath = outputDir.getCanonicalPath();
         } catch (IOException ex) {
-            System.out.println("Error: Could not get path.");
+            JOptionPane.showMessageDialog(null, "The application could "
+                    + "not get the specified path. Please try again.",
+                    "Could Not Get Path", JOptionPane.ERROR_MESSAGE);
         }
 
         outputImage = new BufferedImage(imageWidth, imageHeight, TYPE_INT_RGB);
@@ -250,7 +256,9 @@ public class RGBtoPNG extends javax.swing.JFrame {
         try {
             ImageIO.write(outputImage, "PNG", outputFile);
         } catch (IOException ex) {
-            System.out.println("Error: Could not generate file.");
+            JOptionPane.showMessageDialog(null, "The application could "
+                    + "not generate the file. Please try again.",
+                    "Could Not Generate File", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_genButtonActionPerformed
 
@@ -280,9 +288,62 @@ public class RGBtoPNG extends javax.swing.JFrame {
         blueValueLabel.setText(Integer.toString(blue));
     }//GEN-LAST:event_bSliderStateChanged
 
-    private void generateAllButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateAllButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_generateAllButtonActionPerformed
+    private void genAllButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genAllButtonActionPerformed
+        //declare and initialize a String array of size 16777216 to store all
+        //RGB values recorded in the RGB values file
+        String[] rgbVals = new String[16777216];
+
+        //check that the file containing all RGB values exists, then if it
+        //exists, run the file generation
+        if (rgbFile.exists()) {
+            fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            fileChooser.showDialog(null, "Select Output Directory");
+            outputDir = fileChooser.getSelectedFile();
+
+            try {
+                rgbVals = rgbFileGen.readRGBFile();
+            } catch (IOException | ClassNotFoundException ex) {
+                JOptionPane.showMessageDialog(null, "Error reading RGB file. "
+                        + "Please restart the application to utilize the "
+                        + "'Generate All' functionality.",
+                        "Error Reading RGB File", JOptionPane.ERROR_MESSAGE);
+            }
+
+            for (int i = 0; i < rgbVals.length; i++) {
+                String[] rgbVal = rgbVals[i].split(",");
+                red = Integer.parseInt(rgbVal[0]);
+                green = Integer.parseInt(rgbVal[1]);
+                blue = Integer.parseInt(rgbVal[2]);
+                rgbString = "" + red + "-" + green + "-" + blue;
+
+                imageWidth = Integer.parseInt(widthField.getText());
+                imageHeight = Integer.parseInt(heightField.getText());
+
+                try {
+                    savePath = outputDir.getCanonicalPath();
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(null, "The application could "
+                            + "not get the specified path. Please try again.",
+                            "Could Not Get Path", JOptionPane.ERROR_MESSAGE);
+                }
+
+                outputImage = new BufferedImage(imageWidth, imageHeight, TYPE_INT_RGB);
+                outputFile = new File(savePath + "/" + rgbString + ".png");
+                g2D = outputImage.createGraphics();
+                outputColor = new Color(red, green, blue);
+                g2D.setColor(outputColor);
+                g2D.fillRect(0, 0, imageWidth, imageHeight);
+                try {
+                    ImageIO.write(outputImage, "PNG", outputFile);
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(null, "The application could "
+                            + "not generate the file. Please try again.",
+                            "Could Not Generate File", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+            System.out.println("Done!");
+        }
+    }//GEN-LAST:event_genAllButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -325,8 +386,8 @@ public class RGBtoPNG extends javax.swing.JFrame {
     private javax.swing.JLabel blueValueLabel;
     private javax.swing.JPanel colorPreview;
     private javax.swing.JSlider gSlider;
+    private javax.swing.JButton genAllButton;
     private javax.swing.JButton genButton;
-    private javax.swing.JButton generateAllButton;
     private javax.swing.JLabel greenLabel;
     private javax.swing.JLabel greenValueLabel;
     private javax.swing.JTextField heightField;
