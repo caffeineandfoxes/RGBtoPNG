@@ -248,16 +248,18 @@ public class RGBtoPNG extends javax.swing.JFrame {
 
         outputImage = new BufferedImage(imageWidth, imageHeight, TYPE_INT_RGB);
         outputFile = new File(savePath + "/" + rgbString + ".png");
-        g2D = outputImage.createGraphics();
-        outputColor = new Color(red, green, blue);
-        g2D.setColor(outputColor);
-        g2D.fillRect(0, 0, imageWidth, imageHeight);
-        try {
-            ImageIO.write(outputImage, "PNG", outputFile);
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "The application could "
-                    + "not generate the file. Please try again.",
-                    "Could Not Generate File", JOptionPane.ERROR_MESSAGE);
+        if (!outputFile.exists()) {
+            g2D = outputImage.createGraphics();
+            outputColor = new Color(red, green, blue);
+            g2D.setColor(outputColor);
+            g2D.fillRect(0, 0, imageWidth, imageHeight);
+            try {
+                ImageIO.write(outputImage, "PNG", outputFile);
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "The application could "
+                        + "not generate the file. Please try again.",
+                        "Could Not Generate File", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }//GEN-LAST:event_genButtonActionPerformed
 
@@ -328,16 +330,18 @@ public class RGBtoPNG extends javax.swing.JFrame {
 
                 outputImage = new BufferedImage(imageWidth, imageHeight, TYPE_INT_RGB);
                 outputFile = new File(savePath + "/" + rgbString + ".png");
-                g2D = outputImage.createGraphics();
-                outputColor = new Color(red, green, blue);
-                g2D.setColor(outputColor);
-                g2D.fillRect(0, 0, imageWidth, imageHeight);
-                try {
-                    ImageIO.write(outputImage, "PNG", outputFile);
-                } catch (IOException ex) {
-                    JOptionPane.showMessageDialog(null, "The application could "
-                            + "not generate the file. Please try again.",
-                            "Could Not Generate File", JOptionPane.ERROR_MESSAGE);
+                if (!outputFile.exists()) {
+                    g2D = outputImage.createGraphics();
+                    outputColor = new Color(red, green, blue);
+                    g2D.setColor(outputColor);
+                    g2D.fillRect(0, 0, imageWidth, imageHeight);
+                    try {
+                        ImageIO.write(outputImage, "PNG", outputFile);
+                    } catch (IOException ex) {
+                        JOptionPane.showMessageDialog(null, "The application could "
+                                + "not generate the file. Please try again.",
+                                "Could Not Generate File", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             }
             System.out.println("Done!");
