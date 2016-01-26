@@ -54,7 +54,6 @@ public class RGBtoPNG extends javax.swing.JFrame {
     private Graphics2D g2D;
     private Color outputColor;
     private File rgbFile = new File("rgbValueArray.rgb");
-    ;
     private RGBFileGenerator rgbFileGen = new RGBFileGenerator();
 
     /**
