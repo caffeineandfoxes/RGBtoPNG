@@ -333,6 +333,8 @@ public class RGBtoPNG extends javax.swing.JFrame {
                     }
                 }
             }
+            JOptionPane.showMessageDialog(null, "File generation complete!",
+                    "File Generation Complete", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_genAllButtonActionPerformed
 
@@ -388,6 +390,8 @@ public class RGBtoPNG extends javax.swing.JFrame {
                     }
                 }
             }
+            JOptionPane.showMessageDialog(null, "File generation complete!",
+                    "File Generation Complete", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_genSamplerButtonActionPerformed
 
@@ -401,8 +405,8 @@ public class RGBtoPNG extends javax.swing.JFrame {
         sizeOptionsPanel.add(widthField);
         sizeOptionsPanel.add(heightLabel);
         sizeOptionsPanel.add(heightField);
-        JOptionPane.showConfirmDialog(null, sizeOptionsPanel, 
-                "Enter the width and height values for output:", 
+        JOptionPane.showConfirmDialog(null, sizeOptionsPanel,
+                "Enter the width and height values for output:",
                 JOptionPane.OK_CANCEL_OPTION);
         this.imageWidth = Integer.parseInt(widthField.getText());
         this.imageHeight = Integer.parseInt(heightField.getText());
