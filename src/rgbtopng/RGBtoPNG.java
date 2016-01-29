@@ -25,6 +25,7 @@ package rgbtopng;
 
 import javax.swing.*;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import static java.awt.image.BufferedImage.TYPE_INT_RGB;
@@ -92,10 +93,6 @@ public class RGBtoPNG extends javax.swing.JFrame {
         gSlider = new javax.swing.JSlider();
         bSlider = new javax.swing.JSlider();
         genButton = new javax.swing.JButton();
-        widthField = new javax.swing.JTextField();
-        heightField = new javax.swing.JTextField();
-        widthLabel = new javax.swing.JLabel();
-        heightLabel = new javax.swing.JLabel();
         redLabel = new javax.swing.JLabel();
         greenLabel = new javax.swing.JLabel();
         blueLabel = new javax.swing.JLabel();
@@ -104,6 +101,10 @@ public class RGBtoPNG extends javax.swing.JFrame {
         blueValueLabel = new javax.swing.JLabel();
         genAllButton = new javax.swing.JButton();
         genSamplerButton = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        fileMenu = new javax.swing.JMenu();
+        editMenu = new javax.swing.JMenu();
+        sizeChangerMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(400, 475));
@@ -136,7 +137,7 @@ public class RGBtoPNG extends javax.swing.JFrame {
             .addGap(0, 96, Short.MAX_VALUE)
         );
 
-        getContentPane().add(colorPreview, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, -1, -1));
+        getContentPane().add(colorPreview, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, -1, -1));
 
         rSlider.setMaximum(255);
         rSlider.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -144,7 +145,7 @@ public class RGBtoPNG extends javax.swing.JFrame {
                 rSliderStateChanged(evt);
             }
         });
-        getContentPane().add(rSlider, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, 250, -1));
+        getContentPane().add(rSlider, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 250, -1));
 
         gSlider.setMaximum(255);
         gSlider.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -152,7 +153,7 @@ public class RGBtoPNG extends javax.swing.JFrame {
                 gSliderStateChanged(evt);
             }
         });
-        getContentPane().add(gSlider, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, 251, -1));
+        getContentPane().add(gSlider, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 220, 251, -1));
 
         bSlider.setMaximum(255);
         bSlider.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -160,7 +161,7 @@ public class RGBtoPNG extends javax.swing.JFrame {
                 bSliderStateChanged(evt);
             }
         });
-        getContentPane().add(bSlider, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 250, 251, -1));
+        getContentPane().add(bSlider, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, 251, -1));
 
         genButton.setBackground(new java.awt.Color(41, 180, 26));
         genButton.setText("Generate");
@@ -169,49 +170,25 @@ public class RGBtoPNG extends javax.swing.JFrame {
                 genButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(genButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, -1, -1));
-
-        widthField.setText("50");
-        widthField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                widthFieldActionPerformed(evt);
-            }
-        });
-        getContentPane().add(widthField, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 300, 75, -1));
-
-        heightField.setText("50");
-        heightField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                heightFieldActionPerformed(evt);
-            }
-        });
-        getContentPane().add(heightField, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 330, 75, -1));
-
-        widthLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        widthLabel.setText("Width");
-        getContentPane().add(widthLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 300, 50, 20));
-
-        heightLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        heightLabel.setText("Height");
-        getContentPane().add(heightLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 330, 50, 20));
+        getContentPane().add(genButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, -1, -1));
 
         redLabel.setText("Red");
-        getContentPane().add(redLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 40, -1));
+        getContentPane().add(redLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 40, -1));
 
         greenLabel.setText("Green");
-        getContentPane().add(greenLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 40, -1));
+        getContentPane().add(greenLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 40, -1));
 
         blueLabel.setText("Blue");
-        getContentPane().add(blueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 40, -1));
+        getContentPane().add(blueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 40, -1));
 
         redValueLabel.setText("50");
-        getContentPane().add(redValueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 150, -1, -1));
+        getContentPane().add(redValueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 170, -1, -1));
 
         greenValueLabel.setText("50");
-        getContentPane().add(greenValueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 200, -1, -1));
+        getContentPane().add(greenValueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 220, -1, -1));
 
         blueValueLabel.setText("50");
-        getContentPane().add(blueValueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 250, -1, -1));
+        getContentPane().add(blueValueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 270, -1, -1));
 
         genAllButton.setText("Generate All");
         genAllButton.addActionListener(new java.awt.event.ActionListener() {
@@ -219,7 +196,7 @@ public class RGBtoPNG extends javax.swing.JFrame {
                 genAllButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(genAllButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 370, -1, -1));
+        getContentPane().add(genAllButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 330, -1, -1));
 
         genSamplerButton.setText("Generate Sampler");
         genSamplerButton.addActionListener(new java.awt.event.ActionListener() {
@@ -227,7 +204,24 @@ public class RGBtoPNG extends javax.swing.JFrame {
                 genSamplerButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(genSamplerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 370, -1, -1));
+        getContentPane().add(genSamplerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 330, -1, -1));
+
+        fileMenu.setText("File");
+        jMenuBar1.add(fileMenu);
+
+        editMenu.setText("Edit");
+
+        sizeChangerMenuItem.setText("Change Output Size");
+        sizeChangerMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sizeChangerMenuItemActionPerformed(evt);
+            }
+        });
+        editMenu.add(sizeChangerMenuItem);
+
+        jMenuBar1.add(editMenu);
+
+        setJMenuBar(jMenuBar1);
 
         bindingGroup.bind();
 
@@ -240,9 +234,6 @@ public class RGBtoPNG extends javax.swing.JFrame {
         green = gSlider.getValue();
         blue = bSlider.getValue();
         rgbString = "" + red + "-" + green + "-" + blue;
-
-        imageWidth = Integer.parseInt(widthField.getText());
-        imageHeight = Integer.parseInt(heightField.getText());
 
         fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         fileChooser.showDialog(null, "Select Output Directory");
@@ -271,14 +262,6 @@ public class RGBtoPNG extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_genButtonActionPerformed
-
-    private void widthFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_widthFieldActionPerformed
-        imageWidth = Integer.parseInt(widthField.getText());
-    }//GEN-LAST:event_widthFieldActionPerformed
-
-    private void heightFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_heightFieldActionPerformed
-        imageHeight = Integer.parseInt(heightField.getText());
-    }//GEN-LAST:event_heightFieldActionPerformed
 
     private void rSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_rSliderStateChanged
         red = rSlider.getValue();
@@ -325,9 +308,6 @@ public class RGBtoPNG extends javax.swing.JFrame {
                 green = Integer.parseInt(rgbVal[1]);
                 blue = Integer.parseInt(rgbVal[2]);
                 rgbString = "" + red + "-" + green + "-" + blue;
-
-                imageWidth = Integer.parseInt(widthField.getText());
-                imageHeight = Integer.parseInt(heightField.getText());
 
                 try {
                     savePath = outputDir.getCanonicalPath();
@@ -384,9 +364,6 @@ public class RGBtoPNG extends javax.swing.JFrame {
                 blue = Integer.parseInt(rgbVal[2]);
                 rgbString = "" + red + "-" + green + "-" + blue;
 
-                imageWidth = Integer.parseInt(widthField.getText());
-                imageHeight = Integer.parseInt(heightField.getText());
-
                 try {
                     savePath = outputDir.getCanonicalPath();
                 } catch (IOException ex) {
@@ -413,6 +390,23 @@ public class RGBtoPNG extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_genSamplerButtonActionPerformed
+
+    private void sizeChangerMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sizeChangerMenuItemActionPerformed
+        JPanel sizeOptionsPanel = new JPanel(new FlowLayout());
+        JLabel widthLabel = new JLabel("Width (px)");
+        JLabel heightLabel = new JLabel("Height (px)");
+        JTextField widthField = new JTextField(3);
+        JTextField heightField = new JTextField(3);
+        sizeOptionsPanel.add(widthLabel);
+        sizeOptionsPanel.add(widthField);
+        sizeOptionsPanel.add(heightLabel);
+        sizeOptionsPanel.add(heightField);
+        JOptionPane.showConfirmDialog(null, sizeOptionsPanel, 
+                "Enter the width and height values for output:", 
+                JOptionPane.OK_CANCEL_OPTION);
+        this.imageWidth = Integer.parseInt(widthField.getText());
+        this.imageHeight = Integer.parseInt(heightField.getText());
+    }//GEN-LAST:event_sizeChangerMenuItemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -454,20 +448,20 @@ public class RGBtoPNG extends javax.swing.JFrame {
     private javax.swing.JLabel blueLabel;
     private javax.swing.JLabel blueValueLabel;
     private javax.swing.JPanel colorPreview;
+    private javax.swing.JMenu editMenu;
+    private javax.swing.JMenu fileMenu;
     private javax.swing.JSlider gSlider;
     private javax.swing.JButton genAllButton;
     private javax.swing.JButton genButton;
     private javax.swing.JButton genSamplerButton;
     private javax.swing.JLabel greenLabel;
     private javax.swing.JLabel greenValueLabel;
-    private javax.swing.JTextField heightField;
-    private javax.swing.JLabel heightLabel;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JSlider rSlider;
     private javax.swing.JLabel redLabel;
     private javax.swing.JLabel redValueLabel;
+    private javax.swing.JMenuItem sizeChangerMenuItem;
     private javax.swing.JLabel titleHeader;
-    private javax.swing.JTextField widthField;
-    private javax.swing.JLabel widthLabel;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }
