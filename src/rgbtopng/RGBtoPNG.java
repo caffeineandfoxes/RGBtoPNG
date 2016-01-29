@@ -282,6 +282,11 @@ public class RGBtoPNG extends javax.swing.JFrame {
     }//GEN-LAST:event_bSliderStateChanged
 
     private void genAllButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genAllButtonActionPerformed
+        //warn users that the operation may take a while to complete
+        JOptionPane.showMessageDialog(null, "This operation may take a while to "
+                + "complete, please allow the application time to generate the files",
+                "Long Operation Warning", JOptionPane.WARNING_MESSAGE);
+
         //declare and initialize a String array of size 16777216 to store all
         //RGB values recorded in the RGB values file
         String[] rgbVals = new String[16777216];
@@ -339,6 +344,11 @@ public class RGBtoPNG extends javax.swing.JFrame {
     }//GEN-LAST:event_genAllButtonActionPerformed
 
     private void genSamplerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genSamplerButtonActionPerformed
+        //warn users that the operation may take a while to complete
+        JOptionPane.showMessageDialog(null, "This operation may take a while to "
+                + "complete, please allow the application time to generate the files",
+                "Long Operation Warning", JOptionPane.WARNING_MESSAGE);
+
         //declare and initialize a String array of size 16777216 to store all
         //RGB values recorded in the RGB values file
         String[] rgbVals = new String[16777216];
