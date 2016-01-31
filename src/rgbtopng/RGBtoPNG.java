@@ -99,7 +99,6 @@ public class RGBtoPNG extends javax.swing.JFrame {
         redValueLabel = new javax.swing.JLabel();
         greenValueLabel = new javax.swing.JLabel();
         blueValueLabel = new javax.swing.JLabel();
-        genAllButton = new javax.swing.JButton();
         genSamplerButton = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
@@ -170,7 +169,7 @@ public class RGBtoPNG extends javax.swing.JFrame {
                 genButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(genButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, -1, -1));
+        getContentPane().add(genButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 330, -1, -1));
 
         redLabel.setText("Red");
         getContentPane().add(redLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 40, -1));
@@ -190,21 +189,13 @@ public class RGBtoPNG extends javax.swing.JFrame {
         blueValueLabel.setText("50");
         getContentPane().add(blueValueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 270, -1, -1));
 
-        genAllButton.setText("Generate All");
-        genAllButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                genAllButtonActionPerformed(evt);
-            }
-        });
-        getContentPane().add(genAllButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 330, -1, -1));
-
         genSamplerButton.setText("Generate Sampler");
         genSamplerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 genSamplerButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(genSamplerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 330, -1, -1));
+        getContentPane().add(genSamplerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 330, -1, -1));
 
         fileMenu.setText("File");
         jMenuBar1.add(fileMenu);
@@ -280,68 +271,6 @@ public class RGBtoPNG extends javax.swing.JFrame {
         colorPreview.setBackground(new Color(red, green, blue));
         blueValueLabel.setText(Integer.toString(blue));
     }//GEN-LAST:event_bSliderStateChanged
-
-    private void genAllButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genAllButtonActionPerformed
-        //warn users that the operation may take a while to complete
-        JOptionPane.showMessageDialog(null, "This operation may take a while to "
-                + "complete, please allow the application time to generate the files",
-                "Long Operation Warning", JOptionPane.WARNING_MESSAGE);
-
-        //declare and initialize a String array of size 16777216 to store all
-        //RGB values recorded in the RGB values file
-        String[] rgbVals = new String[16777216];
-
-        //check that the file containing all RGB values exists, then if it
-        //exists, run the file generation
-        if (rgbFile.exists()) {
-            fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-            fileChooser.showDialog(null, "Select Output Directory");
-            outputDir = fileChooser.getSelectedFile();
-
-            try {
-                rgbVals = rgbFileGen.readRGBFile();
-            } catch (IOException | ClassNotFoundException ex) {
-                JOptionPane.showMessageDialog(null, "Error reading RGB file. "
-                        + "Please restart the application to utilize the "
-                        + "'Generate All' functionality.",
-                        "Error Reading RGB File", JOptionPane.ERROR_MESSAGE);
-            }
-
-            for (int i = 0; i < rgbVals.length; i++) {
-                String[] rgbVal = rgbVals[i].split(",");
-                red = Integer.parseInt(rgbVal[0]);
-                green = Integer.parseInt(rgbVal[1]);
-                blue = Integer.parseInt(rgbVal[2]);
-                rgbString = "" + red + "-" + green + "-" + blue;
-
-                try {
-                    savePath = outputDir.getCanonicalPath();
-                } catch (IOException ex) {
-                    JOptionPane.showMessageDialog(null, "The application could "
-                            + "not get the specified path. Please try again.",
-                            "Could Not Get Path", JOptionPane.ERROR_MESSAGE);
-                }
-
-                outputImage = new BufferedImage(imageWidth, imageHeight, TYPE_INT_RGB);
-                outputFile = new File(savePath + "/" + rgbString + ".png");
-                if (!outputFile.exists()) {
-                    g2D = outputImage.createGraphics();
-                    outputColor = new Color(red, green, blue);
-                    g2D.setColor(outputColor);
-                    g2D.fillRect(0, 0, imageWidth, imageHeight);
-                    try {
-                        ImageIO.write(outputImage, "PNG", outputFile);
-                    } catch (IOException ex) {
-                        JOptionPane.showMessageDialog(null, "The application could "
-                                + "not generate the file. Please try again.",
-                                "Could Not Generate File", JOptionPane.ERROR_MESSAGE);
-                    }
-                }
-            }
-            JOptionPane.showMessageDialog(null, "File generation complete!",
-                    "File Generation Complete", JOptionPane.INFORMATION_MESSAGE);
-        }
-    }//GEN-LAST:event_genAllButtonActionPerformed
 
     private void genSamplerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genSamplerButtonActionPerformed
         //warn users that the operation may take a while to complete
@@ -465,7 +394,6 @@ public class RGBtoPNG extends javax.swing.JFrame {
     private javax.swing.JMenu editMenu;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JSlider gSlider;
-    private javax.swing.JButton genAllButton;
     private javax.swing.JButton genButton;
     private javax.swing.JButton genSamplerButton;
     private javax.swing.JLabel greenLabel;
