@@ -25,14 +25,13 @@ package rgbtopng;
 
 import javax.swing.*;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import static java.awt.image.BufferedImage.TYPE_INT_RGB;
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
 /**
@@ -273,6 +272,46 @@ public class RGBtoPNG extends javax.swing.JFrame {
     }//GEN-LAST:event_blueSliderStateChanged
 
     private void genSamplerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genSamplerButtonActionPerformed
+        //prompt user for sampler size with samplerSizePanel presented in JOptionPane
+        JPanel samplerSizePanel = new JPanel();
+        samplerSizePanel.setLayout(new BoxLayout(samplerSizePanel, BoxLayout.Y_AXIS));
+        JLabel samplerSizeLabel = new JLabel("Please select the sampler size. "
+                + "Smaller values generate larger samplers, larger values generate"
+                + " smaller samplers.");
+        JSlider samplerSizeSlider = new JSlider(1, 5, 3);
+        samplerSizeSlider.setPaintLabels(true);
+        samplerSizeSlider.setSize(50, 10);
+        samplerSizeSlider.setMajorTickSpacing(2);
+        samplerSizeSlider.setMinorTickSpacing(1);
+        samplerSizePanel.add(samplerSizeLabel);
+        samplerSizePanel.add(samplerSizeSlider);
+        JOptionPane.showConfirmDialog(null, samplerSizePanel,
+                "Select Sampler Size",
+                JOptionPane.OK_CANCEL_OPTION);
+        
+        //map sampler size selection to enumerated value
+        int genLoopIncrementVal = samplerSizeSlider.getValue();
+        switch(genLoopIncrementVal) {
+            case 1:
+                genLoopIncrementVal = 10;
+                break;
+            case 2:
+                genLoopIncrementVal = 100;
+                break;
+            case 3:
+                genLoopIncrementVal = 1000;
+                break;
+            case 4:
+                genLoopIncrementVal = 10000;
+                break;
+            case 5:
+                genLoopIncrementVal = 100000;
+                break;
+            default:
+                genLoopIncrementVal = 1000;
+                break;
+        }
+
         //warn users that the operation may take a while to complete
         JOptionPane.showMessageDialog(null, "This operation may take a while to "
                 + "complete, please allow the application time to generate the files",
@@ -298,7 +337,7 @@ public class RGBtoPNG extends javax.swing.JFrame {
                         "Error Reading RGB File", JOptionPane.ERROR_MESSAGE);
             }
 
-            for (int i = 0; i < rgbVals.length; i += 1000) {
+            for (int i = 0; i < rgbVals.length; i += genLoopIncrementVal) {
                 String[] rgbVal = rgbVals[i].split(",");
                 red = Integer.parseInt(rgbVal[0]);
                 green = Integer.parseInt(rgbVal[1]);
