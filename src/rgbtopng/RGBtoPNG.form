@@ -114,12 +114,12 @@
         </DimensionLayout>
       </Layout>
     </Container>
-    <Component class="javax.swing.JSlider" name="rSlider">
+    <Component class="javax.swing.JSlider" name="redSlider">
       <Properties>
         <Property name="maximum" type="int" value="255"/>
       </Properties>
       <Events>
-        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rSliderStateChanged"/>
+        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="redSliderStateChanged"/>
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -127,12 +127,12 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JSlider" name="gSlider">
+    <Component class="javax.swing.JSlider" name="greenSlider">
       <Properties>
         <Property name="maximum" type="int" value="255"/>
       </Properties>
       <Events>
-        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="gSliderStateChanged"/>
+        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="greenSliderStateChanged"/>
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -140,12 +140,12 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JSlider" name="bSlider">
+    <Component class="javax.swing.JSlider" name="blueSlider">
       <Properties>
         <Property name="maximum" type="int" value="255"/>
       </Properties>
       <Events>
-        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="bSliderStateChanged"/>
+        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="blueSliderStateChanged"/>
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">

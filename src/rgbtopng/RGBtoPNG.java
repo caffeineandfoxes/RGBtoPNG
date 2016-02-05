@@ -55,7 +55,7 @@ public class RGBtoPNG extends javax.swing.JFrame {
     private Graphics2D g2D;
     private Color outputColor;
     private File rgbFile = new File("rgbValueArray.rgb");
-    private RGBFileManager rgbFileGen = new RGBFileManager();
+    private RGBFileManager rgbFileMan = new RGBFileManager();
 
     /**
      * Creates new form RGBtoPNG
@@ -67,7 +67,7 @@ public class RGBtoPNG extends javax.swing.JFrame {
         //the application will generate a copy
         if (!rgbFile.exists()) {
             try {
-                rgbFileGen.writeRGBFile();
+                rgbFileMan.writeRGBFile();
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(null, "Error generating RGB file. "
                         + "Please restart the application to utilize the "
@@ -89,9 +89,9 @@ public class RGBtoPNG extends javax.swing.JFrame {
 
         titleHeader = new javax.swing.JLabel();
         colorPreview = new javax.swing.JPanel();
-        rSlider = new javax.swing.JSlider();
-        gSlider = new javax.swing.JSlider();
-        bSlider = new javax.swing.JSlider();
+        redSlider = new javax.swing.JSlider();
+        greenSlider = new javax.swing.JSlider();
+        blueSlider = new javax.swing.JSlider();
         genButton = new javax.swing.JButton();
         redLabel = new javax.swing.JLabel();
         greenLabel = new javax.swing.JLabel();
@@ -138,29 +138,29 @@ public class RGBtoPNG extends javax.swing.JFrame {
 
         getContentPane().add(colorPreview, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, -1, -1));
 
-        rSlider.setMaximum(255);
-        rSlider.addChangeListener(new javax.swing.event.ChangeListener() {
+        redSlider.setMaximum(255);
+        redSlider.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                rSliderStateChanged(evt);
+                redSliderStateChanged(evt);
             }
         });
-        getContentPane().add(rSlider, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 250, -1));
+        getContentPane().add(redSlider, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 250, -1));
 
-        gSlider.setMaximum(255);
-        gSlider.addChangeListener(new javax.swing.event.ChangeListener() {
+        greenSlider.setMaximum(255);
+        greenSlider.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                gSliderStateChanged(evt);
+                greenSliderStateChanged(evt);
             }
         });
-        getContentPane().add(gSlider, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 220, 251, -1));
+        getContentPane().add(greenSlider, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 220, 251, -1));
 
-        bSlider.setMaximum(255);
-        bSlider.addChangeListener(new javax.swing.event.ChangeListener() {
+        blueSlider.setMaximum(255);
+        blueSlider.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                bSliderStateChanged(evt);
+                blueSliderStateChanged(evt);
             }
         });
-        getContentPane().add(bSlider, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, 251, -1));
+        getContentPane().add(blueSlider, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, 251, -1));
 
         genButton.setBackground(new java.awt.Color(41, 180, 26));
         genButton.setText("Generate");
@@ -221,9 +221,9 @@ public class RGBtoPNG extends javax.swing.JFrame {
 
     private void genButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genButtonActionPerformed
         //get rgb values and assign to rgbString
-        red = rSlider.getValue();
-        green = gSlider.getValue();
-        blue = bSlider.getValue();
+        red = redSlider.getValue();
+        green = greenSlider.getValue();
+        blue = blueSlider.getValue();
         rgbString = "" + red + "-" + green + "-" + blue;
 
         fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -254,23 +254,23 @@ public class RGBtoPNG extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_genButtonActionPerformed
 
-    private void rSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_rSliderStateChanged
-        red = rSlider.getValue();
+    private void redSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_redSliderStateChanged
+        red = redSlider.getValue();
         colorPreview.setBackground(new Color(red, green, blue));
         redValueLabel.setText(Integer.toString(red));
-    }//GEN-LAST:event_rSliderStateChanged
+    }//GEN-LAST:event_redSliderStateChanged
 
-    private void gSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_gSliderStateChanged
-        green = gSlider.getValue();
+    private void greenSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_greenSliderStateChanged
+        green = greenSlider.getValue();
         colorPreview.setBackground(new Color(red, green, blue));
         greenValueLabel.setText(Integer.toString(green));
-    }//GEN-LAST:event_gSliderStateChanged
+    }//GEN-LAST:event_greenSliderStateChanged
 
-    private void bSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_bSliderStateChanged
-        blue = bSlider.getValue();
+    private void blueSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_blueSliderStateChanged
+        blue = blueSlider.getValue();
         colorPreview.setBackground(new Color(red, green, blue));
         blueValueLabel.setText(Integer.toString(blue));
-    }//GEN-LAST:event_bSliderStateChanged
+    }//GEN-LAST:event_blueSliderStateChanged
 
     private void genSamplerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genSamplerButtonActionPerformed
         //warn users that the operation may take a while to complete
@@ -290,7 +290,7 @@ public class RGBtoPNG extends javax.swing.JFrame {
             outputDir = fileChooser.getSelectedFile();
 
             try {
-                rgbVals = rgbFileGen.readRGBFile();
+                rgbVals = rgbFileMan.readRGBFile();
             } catch (IOException | ClassNotFoundException ex) {
                 JOptionPane.showMessageDialog(null, "Error reading RGB file. "
                         + "Please restart the application to utilize the "
@@ -387,20 +387,20 @@ public class RGBtoPNG extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JSlider bSlider;
     private javax.swing.JLabel blueLabel;
+    private javax.swing.JSlider blueSlider;
     private javax.swing.JLabel blueValueLabel;
     private javax.swing.JPanel colorPreview;
     private javax.swing.JMenu editMenu;
     private javax.swing.JMenu fileMenu;
-    private javax.swing.JSlider gSlider;
     private javax.swing.JButton genButton;
     private javax.swing.JButton genSamplerButton;
     private javax.swing.JLabel greenLabel;
+    private javax.swing.JSlider greenSlider;
     private javax.swing.JLabel greenValueLabel;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JSlider rSlider;
     private javax.swing.JLabel redLabel;
+    private javax.swing.JSlider redSlider;
     private javax.swing.JLabel redValueLabel;
     private javax.swing.JMenuItem sizeChangerMenuItem;
     private javax.swing.JLabel titleHeader;

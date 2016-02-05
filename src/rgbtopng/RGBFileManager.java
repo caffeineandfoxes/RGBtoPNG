@@ -42,36 +42,36 @@ public class RGBFileManager {
         //declare and initialize variables for use in generating the array which
         //will then be serialized into a .rgb file
         String[] rgbVals = new String[16777216];
-        int r = 0;
-        int g = 0;
-        int b = 0;
+        int red = 0;
+        int green = 0;
+        int blue = 0;
         int rgbCount = 0;
-        FileOutputStream fos;
-        ObjectOutputStream outputStream;
+        FileOutputStream fileOutputStream;
+        ObjectOutputStream objectOutputStream;
 
         //loop through all possible combinations of RGB values and add each RGB
         //value to the rgbVals array as a String object for use with the color
         //sample generator
         for (int i = 0; i < 256; i++) {
-            if (r < 255) {
-                r++;
+            if (red < 255) {
+                red++;
             } else {
-                r = 0;
+                red = 0;
             }
             for (int j = 0; j < 256; j++) {
-                if (g < 255) {
-                    g++;
+                if (green < 255) {
+                    green++;
                 } else {
-                    g = 0;
+                    green = 0;
                 }
                 for (int k = 0; k < 256; k++) {
-                    rgbVals[rgbCount] = r + "," + g + "," + b;
+                    rgbVals[rgbCount] = red + "," + green + "," + blue;
                     rgbCount++;
 
-                    if (b < 255) {
-                        b++;
+                    if (blue < 255) {
+                        blue++;
                     } else {
-                        b = 0;
+                        blue = 0;
                     }
                 }
             }
@@ -79,10 +79,10 @@ public class RGBFileManager {
 
         //creates a file called "rgbValueArray.rgb" and adds the serialized
         //array rgbVals to the file
-        fos = new FileOutputStream("rgbValueArray.rgb");
-        outputStream = new ObjectOutputStream(fos);
-        outputStream.writeObject(rgbVals);
-        outputStream.close();
+        fileOutputStream = new FileOutputStream("rgbValueArray.rgb");
+        objectOutputStream = new ObjectOutputStream(fileOutputStream);
+        objectOutputStream.writeObject(rgbVals);
+        objectOutputStream.close();
     }
 
     //reads in a .rgb file containing a serialized String array of all possible
@@ -91,12 +91,12 @@ public class RGBFileManager {
         //declare and initialize variables for use in reading a RGB file and
         //adding the values to an array of length 16777216 which will be returned
         String[] rgbValueInput = new String[16777216];
-        FileInputStream fis = new FileInputStream("rgbValueArray.rgb");
-        ObjectInputStream inputStream = new ObjectInputStream(fis);
+        FileInputStream fileInputStream = new FileInputStream("rgbValueArray.rgb");
+        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
 
         //read in the array of RGB values from the file and assign it to the
         //rgbValueInput variable to be returned
-        rgbValueInput = (String[]) inputStream.readObject();
+        rgbValueInput = (String[]) objectInputStream.readObject();
         return rgbValueInput;
     }
 
