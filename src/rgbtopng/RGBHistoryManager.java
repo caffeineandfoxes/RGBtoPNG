@@ -35,7 +35,7 @@ import java.util.ArrayList;
  *
  * @author David Fink
  */
-public class RGBHistoryGenerator {
+public class RGBHistoryManager {
     //declare an ArrayList of strings to store the RGB values in the recent
     //history and a n integer value to count how many real values are being stored
     private ArrayList<String> rgbHistory = new ArrayList<>(5);

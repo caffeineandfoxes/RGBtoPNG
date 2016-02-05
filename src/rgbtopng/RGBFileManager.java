@@ -34,7 +34,7 @@ import java.io.ObjectOutputStream;
  *
  * @author David Fink
  */
-public class RGBFileGenerator {
+public class RGBFileManager {
 
     //generates a .rgb file which contains a serialized array of String objects
     //for every possible RGB value
