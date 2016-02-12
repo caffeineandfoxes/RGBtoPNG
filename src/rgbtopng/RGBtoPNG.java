@@ -31,6 +31,7 @@ import java.awt.image.BufferedImage;
 import static java.awt.image.BufferedImage.TYPE_INT_RGB;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
 /**
@@ -53,7 +54,7 @@ public class RGBtoPNG extends javax.swing.JFrame {
     private File outputDir;
     private Graphics2D g2D;
     private Color outputColor;
-    private File rgbFile = new File("rgbValueArray.rgb");
+    private File rgbFile = new File("rgbValues.rgb");
     private RGBFileManager rgbFileMan = new RGBFileManager();
 
     /**
@@ -339,9 +340,9 @@ public class RGBtoPNG extends javax.swing.JFrame {
                 + "complete, please allow the application time to generate the files",
                 "Long Operation Warning", JOptionPane.WARNING_MESSAGE);
 
-        //declare and initialize a String array of size 16777216 to store all
-        //RGB values recorded in the RGB values file
-        String[] rgbVals = new String[16777216];
+        //declare and initialize an ArrayList to store all RGB values recorded
+        //in the RGB values file
+        ArrayList<String> rgbVals = new ArrayList<>();
 
         //check that the file containing all RGB values exists, then if it
         //exists, run the file generation
@@ -359,6 +360,7 @@ public class RGBtoPNG extends javax.swing.JFrame {
                         "Error Reading RGB File", JOptionPane.ERROR_MESSAGE);
             }
 
+            //TODO change implementation to ArrayList
             for (int i = 0; i < rgbVals.length; i += genLoopIncrementVal) {
                 String[] rgbVal = rgbVals[i].split(",");
                 red = Integer.parseInt(rgbVal[0]);
