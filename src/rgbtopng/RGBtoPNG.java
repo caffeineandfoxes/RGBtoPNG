@@ -38,7 +38,8 @@ import javax.imageio.ImageIO;
  * @author David Fink
  */
 public class RGBtoPNG extends javax.swing.JFrame {
-
+    //declare variables for use throughout the application and initialize
+    //as necessary
     private int red = 50;
     private int green = 50;
     private int blue = 50;
@@ -217,6 +218,8 @@ public class RGBtoPNG extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //triggers when the "Generate" button is clicked by the user, and generates
+    //a file with the selected color
     private void genButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genButtonActionPerformed
         //get rgb values and assign to rgbString
         red = redSlider.getValue();
@@ -224,6 +227,7 @@ public class RGBtoPNG extends javax.swing.JFrame {
         blue = blueSlider.getValue();
         rgbString = "" + red + "-" + green + "-" + blue;
 
+        //choose output directory for generated files
         fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         fileChooser.showDialog(null, "Select Output Directory");
         outputDir = fileChooser.getSelectedFile();
@@ -235,6 +239,7 @@ public class RGBtoPNG extends javax.swing.JFrame {
                     "Could Not Get Path", JOptionPane.ERROR_MESSAGE);
         }
 
+        //create the image and write to file in the selected directory
         outputImage = new BufferedImage(imageWidth, imageHeight, TYPE_INT_RGB);
         outputFile = new File(savePath + "/" + rgbString + ".png");
         if (!outputFile.exists()) {
@@ -252,24 +257,42 @@ public class RGBtoPNG extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_genButtonActionPerformed
 
+    //triggers when the red slider value is changed by the user; sets the label
+    //text for the slider, sets the red value variable, and updates the color
+    //preview
     private void redSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_redSliderStateChanged
+        //get the value on the red color slider, apply that value to the color
+        //preview, and set the label text for the slider to the correct value
         red = redSlider.getValue();
         colorPreview.setBackground(new Color(red, green, blue));
         redValueLabel.setText(Integer.toString(red));
     }//GEN-LAST:event_redSliderStateChanged
 
+    //triggers when the green slider value is changed by the user; sets the label
+    //text for the slider, sets the green value variable, and updates the color
+    //preview
     private void greenSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_greenSliderStateChanged
+        //get the value on the green color slider, apply that value to the color
+        //preview, and set the label text for the slider to the correct value
         green = greenSlider.getValue();
         colorPreview.setBackground(new Color(red, green, blue));
         greenValueLabel.setText(Integer.toString(green));
     }//GEN-LAST:event_greenSliderStateChanged
 
+    //triggers when the blue slider value is changed by the user; sets the label
+    //text for the slider, sets the blue value variable, and updates the color
+    //preview
     private void blueSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_blueSliderStateChanged
+        //get the value on the blue color slider, apply that value to the color
+        //preview, and set the label text for the slider to the correct value
         blue = blueSlider.getValue();
         colorPreview.setBackground(new Color(red, green, blue));
         blueValueLabel.setText(Integer.toString(blue));
     }//GEN-LAST:event_blueSliderStateChanged
 
+    //triggers when the "Generate Sampler" button is clicked; prompts user for
+    //a sampler size, then generates a sampler of colors as individual files
+    //in a similar manner as the individual file generator
     private void genSamplerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genSamplerButtonActionPerformed
         //prompt user for sampler size with samplerSizePanel presented in JOptionPane
         JPanel samplerSizePanel = new JPanel();
@@ -372,7 +395,12 @@ public class RGBtoPNG extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_genSamplerButtonActionPerformed
 
+    //triggers when the output size option in the Edit menu is selected' displays
+    //a prompt for the user to set the output width and height, which are then 
+    //set in the imageWidth and imageHeight variables
     private void sizeChangerMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sizeChangerMenuItemActionPerformed
+        //prompt user for new output size for generated files by displaying JPanel
+        //sizeOptionsPanel with fields for width and height
         JPanel sizeOptionsPanel = new JPanel(new FlowLayout());
         JLabel widthLabel = new JLabel("Width (px)");
         JLabel heightLabel = new JLabel("Height (px)");
@@ -385,6 +413,8 @@ public class RGBtoPNG extends javax.swing.JFrame {
         JOptionPane.showConfirmDialog(null, sizeOptionsPanel,
                 "Enter the width and height values for output:",
                 JOptionPane.OK_CANCEL_OPTION);
+        
+        //set the width and height for output files according to entered values
         this.imageWidth = Integer.parseInt(widthField.getText());
         this.imageHeight = Integer.parseInt(heightField.getText());
     }//GEN-LAST:event_sizeChangerMenuItemActionPerformed
