@@ -1,3 +1,13 @@
+# Compiled Java class files
+*.class
+
+# Build files
+build/built-jar.properties
+build/classes/.netbeans_automatic_build
+build/classes/.netbeans_update_resources
+build/classes/rgbtopng/RGBtoPNG.class
+build/classes/rgbtopng/RGBtoPNG.form
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db

@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2015 David Fink.
+ * Copyright 2016 David Fink.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -25,7 +25,6 @@ package rgbtopng;
 
 import javax.swing.*;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
