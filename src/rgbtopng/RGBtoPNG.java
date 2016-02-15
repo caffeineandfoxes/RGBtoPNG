@@ -32,6 +32,7 @@ import static java.awt.image.BufferedImage.TYPE_INT_RGB;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import javax.imageio.ImageIO;
 
 /**
@@ -359,15 +360,31 @@ public class RGBtoPNG extends javax.swing.JFrame {
                         + "'Generate All' functionality.",
                         "Error Reading RGB File", JOptionPane.ERROR_MESSAGE);
             }
-
-            //TODO change implementation to ArrayList
-            for (int i = 0; i < rgbVals.length; i += genLoopIncrementVal) {
-                String[] rgbVal = rgbVals[i].split(",");
-                red = Integer.parseInt(rgbVal[0]);
-                green = Integer.parseInt(rgbVal[1]);
-                blue = Integer.parseInt(rgbVal[2]);
+            
+            //declare and initialize variables to loop through the ArrayList of
+            //RGB values and generate files
+            Iterator valueIterator = rgbVals.iterator();
+            int currentValueIndex = 0;
+            String rgbVal = "";
+            String[] splitRGBValue;
+            
+            //iterate through rgbVals with valueIterator and generate sampler files
+            while(valueIterator.hasNext()) {
+                //increment through a specified number of values (set to the 
+                //user selection) to reach next value to be generated
+                for(int i = 0; i < genLoopIncrementVal; i++)    {
+                    rgbVal = (String)(valueIterator.next());
+                }
+                
+                //split the rgbVal String and set the variables for red, green,
+                //and blue to the desired values
+                splitRGBValue = rgbVal.split(",");
+                red = Integer.parseInt(splitRGBValue[0]);
+                green = Integer.parseInt(splitRGBValue[1]);
+                blue = Integer.parseInt(splitRGBValue[2]);
                 rgbString = "" + red + "-" + green + "-" + blue;
 
+                //get the path to the output directory and store in savePath
                 try {
                     savePath = outputDir.getCanonicalPath();
                 } catch (IOException ex) {
