@@ -45,9 +45,11 @@ public class RGBtoPNG extends javax.swing.JFrame {
     private int red = 50;
     private int green = 50;
     private int blue = 50;
-    private String rgbString;
     private int imageWidth = 50;
     private int imageHeight = 50;
+    private String rgbString;
+    private File rgbFile = new File("rgbValues.rgb");
+    private RGBFileManager rgbFileMan = new RGBFileManager();
     private JFileChooser fileChooser = new javax.swing.JFileChooser();
     private String savePath = "";
     private BufferedImage outputImage;
@@ -55,8 +57,6 @@ public class RGBtoPNG extends javax.swing.JFrame {
     private File outputDir;
     private Graphics2D g2D;
     private Color outputColor;
-    private File rgbFile = new File("rgbValues.rgb");
-    private RGBFileManager rgbFileMan = new RGBFileManager();
 
     /**
      * Creates new form RGBtoPNG
