@@ -364,7 +364,6 @@ public class RGBtoPNG extends javax.swing.JFrame {
             //declare and initialize variables to loop through the ArrayList of
             //RGB values and generate files
             Iterator valueIterator = rgbVals.iterator();
-            int currentValueIndex = 0;
             String rgbVal = "";
             String[] splitRGBValue;
             
