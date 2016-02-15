@@ -373,7 +373,9 @@ public class RGBtoPNG extends javax.swing.JFrame {
                 //increment through a specified number of values (set to the 
                 //user selection) to reach next value to be generated
                 for(int i = 0; i < genLoopIncrementVal; i++)    {
-                    rgbVal = (String)(valueIterator.next());
+                    if(valueIterator.hasNext()) {
+                        rgbVal = (String)(valueIterator.next());
+                    }
                 }
                 
                 //split the rgbVal String and set the variables for red, green,

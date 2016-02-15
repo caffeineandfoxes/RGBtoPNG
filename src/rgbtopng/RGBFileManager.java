@@ -97,7 +97,7 @@ public class RGBFileManager {
 
         //read in the ArrayList of RGB values from the file and assign it to the
         //rgbValueInput variable to be returned
-        if(rgbVals.get(0) == null)  {
+        if(rgbVals.size() == 0)  {
             rgbVals = (ArrayList<String>)(objectInputStream.readObject());
         }
         
