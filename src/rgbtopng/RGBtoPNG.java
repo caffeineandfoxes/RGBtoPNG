@@ -24,7 +24,6 @@
 package rgbtopng;
 
 import javax.swing.*;
-import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -42,12 +41,9 @@ import javax.imageio.ImageIO;
 public class RGBtoPNG extends javax.swing.JFrame {
     //declare variables for use throughout the application and initialize
     //as necessary
-    private int red = 50;
-    private int green = 50;
-    private int blue = 50;
+    private RGB currentRGB = new RGB(50, 50, 50);
     private int imageWidth = 50;
     private int imageHeight = 50;
-    private String rgbString;
     private File rgbFile = new File("rgbValues.rgb");
     private RGBFileManager rgbFileMan = new RGBFileManager();
     private JFileChooser fileChooser = new javax.swing.JFileChooser();
@@ -56,7 +52,6 @@ public class RGBtoPNG extends javax.swing.JFrame {
     private File outputFile;
     private File outputDir;
     private Graphics2D g2D;
-    private Color outputColor;
 
     /**
      * Creates new form RGBtoPNG
@@ -224,10 +219,9 @@ public class RGBtoPNG extends javax.swing.JFrame {
     //a file with the selected color
     private void genButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genButtonActionPerformed
         //get rgb values and assign to rgbString
-        red = redSlider.getValue();
-        green = greenSlider.getValue();
-        blue = blueSlider.getValue();
-        rgbString = "" + red + "-" + green + "-" + blue;
+        currentRGB.setRed(redSlider.getValue());
+        currentRGB.setGreen(greenSlider.getValue());
+        currentRGB.setBlue(blueSlider.getValue());
 
         //choose output directory for generated files
         fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -243,11 +237,10 @@ public class RGBtoPNG extends javax.swing.JFrame {
 
         //create the image and write to file in the selected directory
         outputImage = new BufferedImage(imageWidth, imageHeight, TYPE_INT_RGB);
-        outputFile = new File(savePath + "/" + rgbString + ".png");
+        outputFile = new File(savePath + "/" + currentRGB.toString() + ".png");
         if (!outputFile.exists()) {
             g2D = outputImage.createGraphics();
-            outputColor = new Color(red, green, blue);
-            g2D.setColor(outputColor);
+            g2D.setColor(currentRGB.toColor());
             g2D.fillRect(0, 0, imageWidth, imageHeight);
             try {
                 ImageIO.write(outputImage, "PNG", outputFile);
@@ -265,9 +258,9 @@ public class RGBtoPNG extends javax.swing.JFrame {
     private void redSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_redSliderStateChanged
         //get the value on the red color slider, apply that value to the color
         //preview, and set the label text for the slider to the correct value
-        red = redSlider.getValue();
-        colorPreview.setBackground(new Color(red, green, blue));
-        redValueLabel.setText(Integer.toString(red));
+        currentRGB.setRed(redSlider.getValue());
+        colorPreview.setBackground(currentRGB.toColor());
+        redValueLabel.setText(Integer.toString(currentRGB.getRed()));
     }//GEN-LAST:event_redSliderStateChanged
 
     //triggers when the green slider value is changed by the user; sets the label
@@ -276,9 +269,9 @@ public class RGBtoPNG extends javax.swing.JFrame {
     private void greenSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_greenSliderStateChanged
         //get the value on the green color slider, apply that value to the color
         //preview, and set the label text for the slider to the correct value
-        green = greenSlider.getValue();
-        colorPreview.setBackground(new Color(red, green, blue));
-        greenValueLabel.setText(Integer.toString(green));
+        currentRGB.setGreen(greenSlider.getValue());
+        colorPreview.setBackground(currentRGB.toColor());
+        greenValueLabel.setText(Integer.toString(currentRGB.getGreen()));
     }//GEN-LAST:event_greenSliderStateChanged
 
     //triggers when the blue slider value is changed by the user; sets the label
@@ -287,9 +280,9 @@ public class RGBtoPNG extends javax.swing.JFrame {
     private void blueSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_blueSliderStateChanged
         //get the value on the blue color slider, apply that value to the color
         //preview, and set the label text for the slider to the correct value
-        blue = blueSlider.getValue();
-        colorPreview.setBackground(new Color(red, green, blue));
-        blueValueLabel.setText(Integer.toString(blue));
+        currentRGB.setBlue(blueSlider.getValue());
+        colorPreview.setBackground(currentRGB.toColor());
+        blueValueLabel.setText(Integer.toString(currentRGB.getBlue()));
     }//GEN-LAST:event_blueSliderStateChanged
 
     //triggers when the "Generate Sampler" button is clicked; prompts user for
@@ -343,7 +336,7 @@ public class RGBtoPNG extends javax.swing.JFrame {
 
         //declare and initialize an ArrayList to store all RGB values recorded
         //in the RGB values file
-        ArrayList<String> rgbVals = new ArrayList<>();
+        ArrayList<RGB> rgbVals = new ArrayList<>();
 
         //check that the file containing all RGB values exists, then if it
         //exists, run the file generation
@@ -373,17 +366,16 @@ public class RGBtoPNG extends javax.swing.JFrame {
                 //user selection) to reach next value to be generated
                 for(int i = 0; i < genLoopIncrementVal; i++)    {
                     if(valueIterator.hasNext()) {
-                        rgbVal = (String)(valueIterator.next());
+                        rgbVal = (valueIterator.next().toString());
                     }
                 }
                 
                 //split the rgbVal String and set the variables for red, green,
                 //and blue to the desired values
                 splitRGBValue = rgbVal.split(",");
-                red = Integer.parseInt(splitRGBValue[0]);
-                green = Integer.parseInt(splitRGBValue[1]);
-                blue = Integer.parseInt(splitRGBValue[2]);
-                rgbString = "" + red + "-" + green + "-" + blue;
+                currentRGB.setRed(Integer.parseInt(splitRGBValue[0]));
+                currentRGB.setGreen(Integer.parseInt(splitRGBValue[1]));
+                currentRGB.setBlue(Integer.parseInt(splitRGBValue[2]));
 
                 //get the path to the output directory and store in savePath
                 try {
@@ -395,11 +387,10 @@ public class RGBtoPNG extends javax.swing.JFrame {
                 }
 
                 outputImage = new BufferedImage(imageWidth, imageHeight, TYPE_INT_RGB);
-                outputFile = new File(savePath + "/" + rgbString + ".png");
+                outputFile = new File(savePath + "/" + currentRGB.toString() + ".png");
                 if (!outputFile.exists()) {
                     g2D = outputImage.createGraphics();
-                    outputColor = new Color(red, green, blue);
-                    g2D.setColor(outputColor);
+                    g2D.setColor(currentRGB.toColor());
                     g2D.fillRect(0, 0, imageWidth, imageHeight);
                     try {
                         ImageIO.write(outputImage, "PNG", outputFile);
