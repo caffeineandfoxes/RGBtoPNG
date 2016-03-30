@@ -29,6 +29,7 @@ import java.awt.image.BufferedImage;
 import static java.awt.image.BufferedImage.TYPE_INT_RGB;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -37,7 +38,7 @@ import javax.swing.JOptionPane;
  *
  * @author David Fink
  */
-public class RGB {
+public class RGB implements Serializable {
 
     int red, green, blue;
 
