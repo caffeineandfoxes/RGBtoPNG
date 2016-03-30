@@ -60,7 +60,6 @@ public class RGBtoPNG extends javax.swing.JFrame {
 
         //checks if the file rgbValueArray.rgb exists, and if it does not exist,
         //the application will generate a copy
-        System.out.println(rgbFile.exists());
         if (!rgbFile.exists()) {
             try {
                 rgbFileMan.writeRGBFile();
