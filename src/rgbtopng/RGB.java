@@ -35,46 +35,31 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author david
+ * @author David Fink
  */
 public class RGB {
+
     int red, green, blue;
-    private JFileChooser fileChooser = new javax.swing.JFileChooser();
-    private String savePath;
-    private BufferedImage outputImage;
-    private File outputFile;
-    private File outputDir;
-    private Graphics2D g2D;
-    
-    public RGB()    {
+
+    public RGB() {
         this.red = 0;
         this.green = 0;
         this.blue = 0;
-        this.savePath = "";
     }
-    
-    public RGB(int red, int green, int blue)    {
+
+    public RGB(int red, int green, int blue) {
         this.red = red;
         this.green = green;
         this.blue = blue;
     }
-    
-    public void generateFile(int imageWidth, int imageHeight)  {
-        //choose output directory for generated files
-        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        fileChooser.showDialog(null, "Select Output Directory");
-        outputDir = fileChooser.getSelectedFile();
-        try {
-            savePath = outputDir.getCanonicalPath();
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "The application could "
-                    + "not get the specified path. Please try again.",
-                    "Could Not Get Path", JOptionPane.ERROR_MESSAGE);
-        }
+
+    public void generateFile(int imageWidth, int imageHeight, String savePath) {
+        //Declare Graphics2D object g2D
+        Graphics2D g2D;
 
         //create the image and write to file in the selected directory
-        outputImage = new BufferedImage(imageWidth, imageHeight, TYPE_INT_RGB);
-        outputFile = new File(savePath + "/" + this.toString() + ".png");
+        BufferedImage outputImage = new BufferedImage(imageWidth, imageHeight, TYPE_INT_RGB);
+        File outputFile = new File(savePath + "/" + this.toString() + ".png");
         if (!outputFile.exists()) {
             g2D = outputImage.createGraphics();
             g2D.setColor(this.toColor());
@@ -87,6 +72,28 @@ public class RGB {
                         "Could Not Generate File", JOptionPane.ERROR_MESSAGE);
             }
         }
+    }
+
+    public void generateFileToDirectory(int imageWidth, int imageHeight) {
+        //Declare variables for the operation
+        JFileChooser fileChooser = new javax.swing.JFileChooser();
+        File outputDir;
+        String savePath = "";
+
+        //choose output directory for generated files
+        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        fileChooser.showDialog(null, "Select Output Directory");
+        outputDir = fileChooser.getSelectedFile();
+        try {
+            savePath = outputDir.getCanonicalPath();
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "The application could "
+                    + "not get the specified path. Please try again.",
+                    "Could Not Get Path", JOptionPane.ERROR_MESSAGE);
+        }
+
+        //calls the generateFile method to create the image and write it to file
+        this.generateFile(imageWidth, imageHeight, savePath);
     }
 
     public int getRed() {
@@ -117,8 +124,8 @@ public class RGB {
     public String toString() {
         return "" + red + "-" + green + "-" + blue;
     }
-    
-    public Color toColor()  {
+
+    public Color toColor() {
         return new Color(red, green, blue);
     }
 }
