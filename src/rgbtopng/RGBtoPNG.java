@@ -218,38 +218,13 @@ public class RGBtoPNG extends javax.swing.JFrame {
     //triggers when the "Generate" button is clicked by the user, and generates
     //a file with the selected color
     private void genButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genButtonActionPerformed
-        //get rgb values and assign to rgbString
+        //get rgb values and assign to currentRGB
         currentRGB.setRed(redSlider.getValue());
         currentRGB.setGreen(greenSlider.getValue());
         currentRGB.setBlue(blueSlider.getValue());
 
-        //choose output directory for generated files
-        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        fileChooser.showDialog(null, "Select Output Directory");
-        outputDir = fileChooser.getSelectedFile();
-        try {
-            savePath = outputDir.getCanonicalPath();
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "The application could "
-                    + "not get the specified path. Please try again.",
-                    "Could Not Get Path", JOptionPane.ERROR_MESSAGE);
-        }
-
-        //create the image and write to file in the selected directory
-        outputImage = new BufferedImage(imageWidth, imageHeight, TYPE_INT_RGB);
-        outputFile = new File(savePath + "/" + currentRGB.toString() + ".png");
-        if (!outputFile.exists()) {
-            g2D = outputImage.createGraphics();
-            g2D.setColor(currentRGB.toColor());
-            g2D.fillRect(0, 0, imageWidth, imageHeight);
-            try {
-                ImageIO.write(outputImage, "PNG", outputFile);
-            } catch (IOException ex) {
-                JOptionPane.showMessageDialog(null, "The application could "
-                        + "not generate the file. Please try again.",
-                        "Could Not Generate File", JOptionPane.ERROR_MESSAGE);
-            }
-        }
+        //calls the generateFile function for the current color
+        currentRGB.generateFile(imageWidth, imageHeight);
     }//GEN-LAST:event_genButtonActionPerformed
 
     //triggers when the red slider value is changed by the user; sets the label
