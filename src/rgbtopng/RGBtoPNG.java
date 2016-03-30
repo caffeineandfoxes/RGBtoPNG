@@ -325,7 +325,7 @@ public class RGBtoPNG extends javax.swing.JFrame {
             } catch (IOException | ClassNotFoundException ex) {
                 JOptionPane.showMessageDialog(null, "Error reading RGB file. "
                         + "Please restart the application to utilize the "
-                        + "'Generate All' functionality.",
+                        + "'Generate Sampler' functionality.",
                         "Error Reading RGB File", JOptionPane.ERROR_MESSAGE);
             }
 
