@@ -25,8 +25,6 @@ package rgbtopng;
 
 import javax.swing.*;
 import java.awt.FlowLayout;
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -38,25 +36,24 @@ import java.util.Iterator;
  */
 public class RGBtoPNG extends javax.swing.JFrame {
 
-    //declare variables for use throughout the application and initialize
-    //as necessary
-    private RGB currentRGB = new RGB(50, 50, 50);
-    private int imageWidth = 50;
-    private int imageHeight = 50;
-    private File rgbFile = new File("rgbValues.rgb");
-    private RGBFileManager rgbFileMan = new RGBFileManager();
-    private JFileChooser fileChooser = new javax.swing.JFileChooser();
-    private String savePath = "";
-    private BufferedImage outputImage;
-    private File outputFile;
-    private File outputDir;
-    private Graphics2D g2D;
+    //declare variables for use throughout the application
+    private RGB currentRGB;
+    private int imageWidth, imageHeight;
+    private File rgbFile;
+    private RGBFileManager rgbFileMan;
 
     /**
      * Creates new form RGBtoPNG
      */
     public RGBtoPNG() {
         initComponents();
+        
+        //initialize variables for use throughout the application
+        currentRGB = new RGB(50, 50, 50);
+        imageWidth = 50;
+        imageHeight = 50;
+        rgbFile = new File("rgbValues.rgb");
+        rgbFileMan = new RGBFileManager();
 
         //checks if the file rgbValueArray.rgb exists, and if it does not exist,
         //the application will generate a copy
@@ -315,9 +312,10 @@ public class RGBtoPNG extends javax.swing.JFrame {
         //check that the file containing all RGB values exists, then if it
         //exists, run the file generation
         if (rgbFile.exists()) {
+            JFileChooser fileChooser = new javax.swing.JFileChooser();
             fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
             fileChooser.showDialog(null, "Select Output Directory");
-            outputDir = fileChooser.getSelectedFile();
+            File outputDir = fileChooser.getSelectedFile();
 
             try {
                 rgbVals = rgbFileMan.readRGBFile();
@@ -332,6 +330,7 @@ public class RGBtoPNG extends javax.swing.JFrame {
             //RGB values and generate files
             Iterator valueIterator = rgbVals.iterator();
             RGB iteratedRGB = null;
+            String savePath = "";
 
             //iterate through rgbVals with valueIterator and generate sampler files
             while (valueIterator.hasNext()) {
@@ -399,15 +398,11 @@ public class RGBtoPNG extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RGBtoPNG.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RGBtoPNG.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RGBtoPNG.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(RGBtoPNG.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        
         //</editor-fold>
 
         /* Create and display the form */
