@@ -37,7 +37,7 @@ import java.util.ArrayList;
  */
 public class RGBFileManager {
 
-    private ArrayList<String> rgbVals = new ArrayList<>();
+    private ArrayList<RGB> rgbVals = new ArrayList<>();
 
     //generates a .rgb file which contains a serialized array of String objects
     //for every possible RGB value
@@ -67,7 +67,7 @@ public class RGBFileManager {
                     green = 0;
                 }
                 for (int k = 0; k < 256; k++) {
-                    rgbVals.add(red + "," + green + "," + blue);
+                    rgbVals.add(new RGB(red, green, blue));
                     rgbCount++;
 
                     if (blue < 255) {
@@ -89,7 +89,7 @@ public class RGBFileManager {
 
     //reads in a .rgb file containing a serialized String ArrayList of all possible
     //RGB values and returns to the application
-    public ArrayList<String> readRGBFile() throws IOException, ClassNotFoundException {
+    public ArrayList<RGB> readRGBFile() throws IOException, ClassNotFoundException {
         //declare and initialize variables for use in reading a RGB file and
         //adding the values to an ArrayList which will be returned
         FileInputStream fileInputStream = new FileInputStream("rgbValues.rgb");
@@ -98,7 +98,7 @@ public class RGBFileManager {
         //read in the ArrayList of RGB values from the file and assign it to the
         //rgbValueInput variable to be returned
         if (rgbVals.isEmpty()) {
-            rgbVals = (ArrayList<String>) (objectInputStream.readObject());
+            rgbVals = (ArrayList<RGB>) (objectInputStream.readObject());
         }
 
         return rgbVals;
