@@ -329,6 +329,7 @@ public class RGBtoPNG extends javax.swing.JFrame {
             //declare and initialize variables to loop through the ArrayList of
             //RGB values and generate files
             Iterator valueIterator = rgbVals.iterator();
+            int seedValue = (int) Math.floor(10 * Math.random());
             RGB iteratedRGB = null;
             String savePath = "";
 
@@ -336,7 +337,7 @@ public class RGBtoPNG extends javax.swing.JFrame {
             while (valueIterator.hasNext()) {
                 //increment through a specified number of values (set to the 
                 //user selection) to reach next value to be generated
-                for (int i = 0; i < genLoopIncrementVal; i++) {
+                for (int i = seedValue; i < genLoopIncrementVal; i++) {
                     if (valueIterator.hasNext()) {
                         iteratedRGB = (RGB) valueIterator.next();
                     }
