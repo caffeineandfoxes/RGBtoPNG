@@ -336,7 +336,8 @@ public class RGBtoPNG extends javax.swing.JFrame {
             //iterate through rgbVals with valueIterator and generate sampler files
             while (valueIterator.hasNext()) {
                 //increment through a specified number of values (set to the 
-                //user selection) to reach next value to be generated
+                //user selection) starting with a random 0-10 seed value to 
+                //reach next value to be generated
                 for (int i = seedValue; i < genLoopIncrementVal; i++) {
                     if (valueIterator.hasNext()) {
                         iteratedRGB = (RGB) valueIterator.next();
