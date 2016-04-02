@@ -29,8 +29,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedList;
 
 /**
@@ -81,7 +79,7 @@ public class RGBHistoryManager {
     //add a color to the history and return true or false, depending on whether
     //or not the add operation completed successfully
     public boolean addRGBHistory(RGB rgbVal) {
-        if (historyCount <= 5) {
+        if (historyCount >= 5) {
             //removes the oldest RGB value to make room for the new value and 
             //decrements the historyCount variable in case the later addition 
             //operation is unsuccessful
