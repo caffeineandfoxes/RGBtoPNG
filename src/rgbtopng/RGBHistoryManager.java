@@ -99,8 +99,17 @@ public class RGBHistoryManager {
         return addSuccessful;
     }
     
+    //clears all RGB history and resets the historyCount variable to 0
     public void clearRGBHistory()   {
         rgbHistory = new LinkedList<>();
         historyCount = 0;
+    }
+
+    public LinkedList<RGB> getRGBHistory() {
+        return rgbHistory;
+    }
+
+    public int getHistoryCount() {
+        return historyCount;
     }
 }
