@@ -80,7 +80,7 @@ public class RGBFileManager {
         }
 
         //creates a file called "rgbValues.rgb" and adds the serialized
-        //array rgbVals to the file
+        //ArrayList rgbVals to the file
         fileOutputStream = new FileOutputStream("rgbValues.rgb");
         objectOutputStream = new ObjectOutputStream(fileOutputStream);
         objectOutputStream.writeObject(rgbVals);
