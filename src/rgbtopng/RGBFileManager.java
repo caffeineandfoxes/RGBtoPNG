@@ -100,6 +100,9 @@ public class RGBFileManager {
         if (rgbVals.isEmpty()) {
             rgbVals = (ArrayList<RGB>) (objectInputStream.readObject());
         }
+        
+        //close the input stream
+        objectInputStream.close();
 
         return rgbVals;
     }
