@@ -47,7 +47,7 @@ public class RGBtoPNG extends javax.swing.JFrame {
      */
     public RGBtoPNG() {
         initComponents();
-        
+
         //initialize variables for use throughout the application
         currentRGB = new RGB(50, 50, 50);
         imageWidth = 50;
@@ -273,90 +273,102 @@ public class RGBtoPNG extends javax.swing.JFrame {
         samplerSizeSlider.setMinorTickSpacing(1);
         samplerSizePanel.add(samplerSizeLabel);
         samplerSizePanel.add(samplerSizeSlider);
-        JOptionPane.showConfirmDialog(null, samplerSizePanel,
+
+        //declare and initialize variable performOperation which will grab input
+        //regarding whether or not the user wishes to continue file generation at
+        //each stage where a cancel option is provided
+        int performOperation = JOptionPane.showConfirmDialog(null, samplerSizePanel,
                 "Select Sampler Size",
                 JOptionPane.OK_CANCEL_OPTION);
 
-        //map sampler size selection to enumerated value
-        int genLoopIncrementVal = samplerSizeSlider.getValue();
-        switch (genLoopIncrementVal) {
-            case 1:
-                genLoopIncrementVal = 10;
-                break;
-            case 2:
-                genLoopIncrementVal = 100;
-                break;
-            case 3:
-                genLoopIncrementVal = 1000;
-                break;
-            case 4:
-                genLoopIncrementVal = 10000;
-                break;
-            case 5:
-                genLoopIncrementVal = 100000;
-                break;
-            default:
-                genLoopIncrementVal = 1000;
-                break;
-        }
-
-        //warn users that the operation may take a while to complete
-        JOptionPane.showMessageDialog(null, "This operation may take a while to "
-                + "complete, please allow the application time to generate the files",
-                "Long Operation Warning", JOptionPane.WARNING_MESSAGE);
-
-        //declare and initialize an ArrayList to store all RGB values recorded
-        //in the RGB values file
-        ArrayList<RGB> rgbVals = new ArrayList<>();
-
-        //check that the file containing all RGB values exists, then if it
-        //exists, run the file generation
-        if (rgbFile.exists()) {
-            JFileChooser fileChooser = new javax.swing.JFileChooser();
-            fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-            fileChooser.showDialog(null, "Select Output Directory");
-            File outputDir = fileChooser.getSelectedFile();
-
-            try {
-                rgbVals = rgbFileMan.readRGBFile();
-            } catch (IOException | ClassNotFoundException ex) {
-                JOptionPane.showMessageDialog(null, "Error reading RGB file. "
-                        + "Please restart the application to utilize the "
-                        + "'Generate Sampler' functionality.",
-                        "Error Reading RGB File", JOptionPane.ERROR_MESSAGE);
+        //map sampler size selection to enumerated value if the user chose to
+        //perform the operation
+        if (performOperation == JOptionPane.OK_OPTION) {
+            int genLoopIncrementVal = samplerSizeSlider.getValue();
+            switch (genLoopIncrementVal) {
+                case 1:
+                    genLoopIncrementVal = 10;
+                    break;
+                case 2:
+                    genLoopIncrementVal = 100;
+                    break;
+                case 3:
+                    genLoopIncrementVal = 1000;
+                    break;
+                case 4:
+                    genLoopIncrementVal = 10000;
+                    break;
+                case 5:
+                    genLoopIncrementVal = 100000;
+                    break;
+                default:
+                    genLoopIncrementVal = 1000;
+                    break;
             }
 
-            //declare and initialize variables to loop through the ArrayList of
-            //RGB values and generate files
-            Iterator valueIterator = rgbVals.iterator();
-            int seedValue = (int) Math.floor(10 * Math.random());
-            RGB iteratedRGB = null;
-            String savePath = "";
+            //warn users that the operation may take a while to complete
+            JOptionPane.showMessageDialog(null, "This operation may take a while to "
+                    + "complete, please allow the application time to generate the files",
+                    "Long Operation Warning", JOptionPane.WARNING_MESSAGE);
 
-            //iterate through rgbVals with valueIterator and generate sampler files
-            while (valueIterator.hasNext()) {
-                //increment through a specified number of values (set to the 
-                //user selection) starting with a random 0-10 seed value to 
-                //reach next value to be generated
-                for (int i = seedValue; i < genLoopIncrementVal; i++) {
-                    if (valueIterator.hasNext()) {
-                        iteratedRGB = (RGB) valueIterator.next();
+            //declare and initialize an ArrayList to store all RGB values recorded
+            //in the RGB values file
+            ArrayList<RGB> rgbVals = new ArrayList<>();
+
+            //check that the file containing all RGB values exists, then if it
+            //exists, run the file generation
+            if (rgbFile.exists()) {
+                JFileChooser fileChooser = new javax.swing.JFileChooser();
+                fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                performOperation = fileChooser.showDialog(null, "Select Output Directory");
+
+                //continues file generation only if user has selected a directory
+                //with the file chooser
+                if (performOperation == JFileChooser.APPROVE_OPTION) {
+                    File outputDir = fileChooser.getSelectedFile();
+
+                    try {
+                        rgbVals = rgbFileMan.readRGBFile();
+                    } catch (IOException | ClassNotFoundException ex) {
+                        JOptionPane.showMessageDialog(null, "Error reading RGB file. "
+                                + "Please restart the application to utilize the "
+                                + "'Generate Sampler' functionality.",
+                                "Error Reading RGB File", JOptionPane.ERROR_MESSAGE);
                     }
-                }
 
-                //get the path to the output directory and store in savePath
-                try {
-                    savePath = outputDir.getCanonicalPath();
-                } catch (IOException ex) {
-                    JOptionPane.showMessageDialog(null, "The application could "
-                            + "not get the specified path. Please try again.",
-                            "Could Not Get Path", JOptionPane.ERROR_MESSAGE);
-                }
+                    //declare and initialize variables to loop through the ArrayList of
+                    //RGB values and generate files
+                    Iterator valueIterator = rgbVals.iterator();
+                    int seedValue = (int) Math.floor(10 * Math.random());
+                    RGB iteratedRGB = null;
+                    String savePath = "";
 
-                iteratedRGB.generateFile(imageWidth, imageHeight, savePath);
+                    //iterate through rgbVals with valueIterator and generate sampler files
+                    while (valueIterator.hasNext()) {
+                        //increment through a specified number of values (set to the 
+                        //user selection) starting with a random 0-10 seed value to 
+                        //reach next value to be generated
+                        for (int i = seedValue; i < genLoopIncrementVal; i++) {
+                            if (valueIterator.hasNext()) {
+                                iteratedRGB = (RGB) valueIterator.next();
+                            }
+                        }
+
+                        //get the path to the output directory and store in savePath
+                        try {
+                            savePath = outputDir.getCanonicalPath();
+                        } catch (IOException ex) {
+                            JOptionPane.showMessageDialog(null, "The application could "
+                                    + "not get the specified path. Please try again.",
+                                    "Could Not Get Path", JOptionPane.ERROR_MESSAGE);
+                        }
+
+                        iteratedRGB.generateFile(imageWidth, imageHeight, savePath);
+                    }
+                    JOptionPane.showMessageDialog(null, "File generation complete!",
+                            "File Generation Complete", JOptionPane.INFORMATION_MESSAGE);
+                }
             }
-            JOptionPane.showMessageDialog(null, "File generation complete!",
-                    "File Generation Complete", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_genSamplerButtonActionPerformed
 
@@ -375,13 +387,21 @@ public class RGBtoPNG extends javax.swing.JFrame {
         sizeOptionsPanel.add(widthField);
         sizeOptionsPanel.add(heightLabel);
         sizeOptionsPanel.add(heightField);
-        JOptionPane.showConfirmDialog(null, sizeOptionsPanel,
+
+        //declare variable performOperation which will grab input regarding 
+        //whether or not the user wishes to continue with the operation
+        int performOperation;
+
+        performOperation = JOptionPane.showConfirmDialog(null, sizeOptionsPanel,
                 "Enter the width and height values for output:",
                 JOptionPane.OK_CANCEL_OPTION);
 
         //set the width and height for output files according to entered values
-        this.imageWidth = Integer.parseInt(widthField.getText());
-        this.imageHeight = Integer.parseInt(heightField.getText());
+        //only if the user selected 'OK' in the prompt
+        if (performOperation == JOptionPane.OK_OPTION) {
+            this.imageWidth = Integer.parseInt(widthField.getText());
+            this.imageHeight = Integer.parseInt(heightField.getText());
+        }
     }//GEN-LAST:event_sizeChangerMenuItemActionPerformed
 
     /**
@@ -404,7 +424,7 @@ public class RGBtoPNG extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(RGBtoPNG.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
+
         //</editor-fold>
 
         /* Create and display the form */

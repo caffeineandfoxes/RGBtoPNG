@@ -78,23 +78,29 @@ public class RGB implements Serializable {
     public void generateFileToDirectory(int imageWidth, int imageHeight) {
         //Declare variables for the operation
         JFileChooser fileChooser = new javax.swing.JFileChooser();
+        int performOperation;
         File outputDir;
         String savePath = "";
 
         //choose output directory for generated files
         fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        fileChooser.showDialog(null, "Select Output Directory");
-        outputDir = fileChooser.getSelectedFile();
-        try {
-            savePath = outputDir.getCanonicalPath();
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "The application could "
-                    + "not get the specified path. Please try again.",
-                    "Could Not Get Path", JOptionPane.ERROR_MESSAGE);
-        }
+        performOperation = fileChooser.showDialog(null, "Select Output Directory");
 
-        //calls the generateFile method to create the image and write it to file
-        this.generateFile(imageWidth, imageHeight, savePath);
+        //continues generating the file only if the user selected a directory
+        //in the file chooser
+        if (performOperation == JFileChooser.APPROVE_OPTION) {
+            outputDir = fileChooser.getSelectedFile();
+            try {
+                savePath = outputDir.getCanonicalPath();
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "The application could "
+                        + "not get the specified path. Please try again.",
+                        "Could Not Get Path", JOptionPane.ERROR_MESSAGE);
+            }
+
+            //calls the generateFile method to create the image and write it to file
+            this.generateFile(imageWidth, imageHeight, savePath);
+        }
     }
 
     public int getRed() {
