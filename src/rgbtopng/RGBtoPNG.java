@@ -343,6 +343,15 @@ public class RGBtoPNG extends javax.swing.JFrame {
                     RGB iteratedRGB = null;
                     String savePath = "";
 
+                    //get the path to the output directory and store in savePath
+                    try {
+                        savePath = outputDir.getCanonicalPath();
+                    } catch (IOException ex) {
+                        JOptionPane.showMessageDialog(null, "The application could "
+                                + "not get the specified path. Please try again.",
+                                "Could Not Get Path", JOptionPane.ERROR_MESSAGE);
+                    }
+
                     //iterate through rgbVals with valueIterator and generate sampler files
                     while (valueIterator.hasNext()) {
                         //increment through a specified number of values (set to the 
@@ -353,16 +362,6 @@ public class RGBtoPNG extends javax.swing.JFrame {
                                 iteratedRGB = (RGB) valueIterator.next();
                             }
                         }
-
-                        //get the path to the output directory and store in savePath
-                        try {
-                            savePath = outputDir.getCanonicalPath();
-                        } catch (IOException ex) {
-                            JOptionPane.showMessageDialog(null, "The application could "
-                                    + "not get the specified path. Please try again.",
-                                    "Could Not Get Path", JOptionPane.ERROR_MESSAGE);
-                        }
-
                         iteratedRGB.generateFile(imageWidth, imageHeight, savePath);
                     }
                     JOptionPane.showMessageDialog(null, "File generation complete!",
