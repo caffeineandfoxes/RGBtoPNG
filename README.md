@@ -5,10 +5,10 @@ RGBtoPNG comes as an executable JAR, and allows users to generate PNG files from
 
 DOWNLOAD: https://github.com/dfinkdd/RGBtoPNG/releases/download/v1.2.1/RGBtoPNG_1-2-1.jar
 
-##Use Case
+## Use Case
 This program was created to give creative workers an easy way to generate imagery depicting colors needed for a project, either to store for oneself or to pass along to a fellow creative for reference.
 
-##Instructions
+## Instructions
 To generate a single PNG image in your color of choice, follow these steps:
 
 1. Use the provided sliders to define the desired red, green, and blue values that make up your color.
@@ -17,7 +17,7 @@ To generate a single PNG image in your color of choice, follow these steps:
 4. Navigate to the desired output directory using the window that appears, and click "Set Output Directory" when finished.
 5. The PNG file will be generated in your specified directory, and the program will remain open in the case that the user wishes to generate additional files.
 
-##Disclaimer
+## Disclaimer
 I am not responsible for any losses, damages, or other consequences of running this program on your computer system. By downloading and running the program, you are accepting any and all responsibility for the program's actions. Use at your own risk.
 
-#Enjoy!
+# Enjoy!
