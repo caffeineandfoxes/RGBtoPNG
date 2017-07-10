@@ -4,6 +4,7 @@ RGBtoPNG
 RGBtoPNG comes as an executable JAR, and allows users to generate PNG files from colors in the RGB colorspace.
 
 DOWNLOAD: https://github.com/dfinkdd/RGBtoPNG/releases/download/v1.2.1/RGBtoPNG_1-2-1.jar
+(Please note that you may need to build RGBtoPNG from its source to run properly on your system.)
 
 ## Use Case
 This program was created to give creative workers an easy way to generate imagery depicting colors needed for a project, either to store for oneself or to pass along to a fellow creative for reference.
