@@ -1,6 +1,8 @@
 RGBtoPNG
 ========
 
+**NOTE: RGBtoPNG is no longer maintained or supported. If you would like to use this product, please consider contributing to its development and support.**
+
 RGBtoPNG comes as an executable JAR, and allows users to generate PNG files from colors in the RGB colorspace.
 
 DOWNLOAD: https://github.com/dfinkdd/RGBtoPNG/releases/download/v1.2.1/RGBtoPNG_1-2-1.jar
